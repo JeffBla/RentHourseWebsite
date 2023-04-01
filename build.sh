@@ -18,14 +18,17 @@ echo "version: " ${VERSION}
 
 if [ -z "$TRAVIS" ]; then
 	TAG="${VERSION}"
-	IMAGE=JeffBla/expressjs:${TAG}
+	IMAGE=jeffbla/expressjs:${TAG}
 
 	echo "running container image:" ${IMAGE}
 	
+	# build and execute it, when exit then exit 
 	docker run -it --rm --name expressjs --publish 8080:8080 ${IMAGE}
 
-	echo "deleting image"
-	docker rmi ${IMAGE}
+	# echo "deleting image"
+	# docker rmi ${IMAGE}
 fi
 
 echo "DONE"
+
+# read -p "please press any key to continue"
