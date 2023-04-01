@@ -5,7 +5,7 @@ echo "Setup environment"
 ./setup.sh
 
 echo "grunt"
-grunt
+grunt &> gruntCheck.log
 
 echo "building docker image"
 VERSION="$1"
