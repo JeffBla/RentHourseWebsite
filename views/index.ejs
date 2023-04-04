@@ -57,7 +57,7 @@
                           <%- include('filter.ejs', {name : 'price', title : '租金', options : ['5000以下','5000~10000','10000~20000','20000~30000','30000~50000','50000以上']}); %>
                         </div>
                         <div class="col-4 p-3">
-                            <button type="submit" class="btn round bg-light w-100 h-100">搜尋</button>
+                            <button id="submitBtn" type="submit" class="btn round bg-light w-100 h-100">搜尋</button>
                         </div>
                     </div>
                   </div>
@@ -86,6 +86,34 @@
         <script src="js/tw-city-selector.min.js"></script>
         <script>
             new TwCitySelector();
+            $(document).ready(function() {
+                $('#submitBtn').click(function() {
+                    const countyValue = $('#county').val();
+                    const districtValue = $('#district').val();
+                    const typeValue = $('#type').val();
+                    const priceValue = $('#price').val();
+
+                    // make AJAX request to backend API
+                    $.ajax({
+                    type: 'POST',
+                    url: '/submit',
+                    data: {
+                        county: countyValue,
+                        district: districtValue,
+                        type: typeValue,
+                        price: priceValue
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        // handle successful response from backend
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        // handle error response from backend
+                    }
+                    });
+                });
+            });
         </script>
     </body>
 </html>
