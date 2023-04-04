@@ -7,7 +7,7 @@ services:
   #     - 8085:80
   #   container_name: webApp
   backend:
-    build: ./
+    # build: ./
     image: jeffbla/expressjs:latest
     ports:
       - 8080:8080
@@ -26,5 +26,3 @@ services:
 
 volumes:
   pgdata:
-
-    
