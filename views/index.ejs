@@ -48,6 +48,20 @@
                     <h1 class="display-4 fw-bolder">Shop in style</h1>
                     <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
                 </div>
+                <div class="row justify-content-center my-2">
+                  <div class="col-7 bg-white py-2 card rounded">
+                    <div class="row justify-content-start">
+                        <div class="col-4 " role="tw-city-selector" data-bootstrap-style></div>
+                        <div class="col-4">
+                          <%- include('filter.ejs', {name : 'type', title : '型態', options : ['整層住家','獨立套房','分租套房','雅房','店面','住辦','商用','廠房','車位','土地','其他']}); %>
+                          <%- include('filter.ejs', {name : 'price', title : '租金', options : ['5000以下','5000~10000','10000~20000','20000~30000','30000~50000','50000以上']}); %>
+                        </div>
+                        <div class="col-4 p-3">
+                            <button type="submit" class="btn round bg-light w-100 h-100">搜尋</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
             </div>
         </header>
         <!-- Section-->
@@ -64,7 +78,14 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
         </footer>
+        <!-- jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Taiwan city selector -->
+        <script src="js/tw-city-selector.min.js"></script>
+        <script>
+            new TwCitySelector();
+        </script>
     </body>
 </html>

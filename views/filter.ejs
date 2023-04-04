@@ -1,0 +1,9 @@
+<div class="form-group m-1">
+  <select class="form-control" name="<%= name %>">
+  <option value=""><%= title %></option>
+  
+  <% for (var i = 0; i < options.length; i++) { %>
+    <option value="<%= options[i] %>"><%= options[i] %></option>
+  <% } %>
+  </select>
+</div>
