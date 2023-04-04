@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  # frontend:
+  #   build: ./html
+  #   image: webApp:latest
+  #   ports:
+  #     - 8085:80
+  #   container_name: webApp
+  backend:
+    # build: ./
+    image: jeffbla/expressjs:latest
+    ports:
+      - 8080:8080
+    container_name: expressjs
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdata:

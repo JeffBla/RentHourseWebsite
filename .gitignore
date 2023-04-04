@@ -4,6 +4,7 @@ data
 logs
 *.log
 npm-debug.log*
+gruntCheck.log
 
 # Runtime data
 pids
