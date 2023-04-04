@@ -7,7 +7,7 @@ const Repository = require('../src/repository');
 /* eslint-disable no-unused-vars */
 router.get('/', (req, res, next) => {
 	const repo = new Repository('Supa Testing user');
-	res.render('index', { title: 'Express', name: repo.getData() });
+	res.render('index', { houses: repo.getHouses() });
 });
 /* eslint-disable no-unused-vars */
 
