@@ -7,9 +7,10 @@ const Repository = require("../src/repository");
 const db = require("../query");
 
 /* eslint-disable no-unused-vars */
-router.get('/', (req, res, next) => {
-	const repo = new Repository('Supa Testing user');
-	res.render('index', { houses: repo.getHouses() });
+router.get("/", (req, res, next) => {
+  const repo = new Repository("Supa Testing user");
+  res.render("index", { houses: repo.getHouses() });
+});
 
 router.get("/db", (req, res, next) => {
   db.query("Select * From ${table:name}", {
