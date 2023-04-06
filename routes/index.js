@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 
 router.get("/db", (req, res, next) => {
   db.query("Select * From ${table:name}", {
-    table: "test",
+    table: "houseinfo",
   }).then((data) => {
     res.send(data);
   });
