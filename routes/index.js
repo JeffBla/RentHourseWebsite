@@ -10,6 +10,14 @@ router.get('/', (req, res, next) => {
 	res.render('index', { houses: repo.getHouses() });
 });
 /* eslint-disable no-unused-vars */
+router.get('/signin', (req, res, next) => {
+	res.render('signin');
+});
+/* eslint-disable no-unused-vars */
+router.get('/favorites', (req, res, next) => {
+	res.render('favorites');
+});
+/* eslint-disable no-unused-vars */
 
 router.post('/submit', (req, res, next) => {
 	console.log('選擇縣市：'+req.body.county);
