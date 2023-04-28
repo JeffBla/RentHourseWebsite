@@ -15,8 +15,8 @@
                   <div class="col-7 bg-white py-2 card rounded">
                     <div class="row justify-content-start">
                         <div class="col-9">
-                          <%- include('filter.ejs', {name : 'type', title : '型態', options : filter_data.types}); %>
-                          <%- include('filter.ejs', {name : 'price', title : '租金', options : filter_data.prices}); %>
+                          <%- include('filter.ejs', {title : '型態', options : filter_data.types}); %>
+                          <%- include('filter.ejs', {title : '租金', options : filter_data.prices}); %>
                           <button class="btn btn-link text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <i class="bi bi-chevron-down me-2"></i>
                             更多選項
@@ -25,7 +25,7 @@
                           <div class="collapse" id="collapseExample">
                             <div class="card card-body">
                                 <% for (var i = 0; i < filter_data.others.length; i++){ %>
-                                    <%- include('filter.ejs', {name : 'price', title : filter_data.others[i], options : filter_data.other_options[i]}); %>
+                                    <%- include('filter.ejs', {title : filter_data.others[i], options : filter_data.other_options[i]}); %>
                                 <% } %>
                             </div>
                           </div>
