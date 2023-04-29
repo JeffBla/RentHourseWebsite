@@ -15,6 +15,7 @@
                   <div class="col-7 bg-white py-2 card rounded">
                     <div class="row justify-content-start">
                         <div class="col-9">
+                          <%- include('filter2d.ejs', {title : '地區', options : filter_data.counties, options2d : filter_data.districts}); %>
                           <%- include('filter.ejs', {title : '型態', options : filter_data.types}); %>
                           <%- include('filter.ejs', {title : '租金', options : filter_data.prices}); %>
                           <button class="btn btn-link text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">

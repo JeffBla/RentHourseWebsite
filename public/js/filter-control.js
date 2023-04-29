@@ -1,6 +1,6 @@
 function myFunction(labelAreaId, checkBoxId, label) {
   var checkBox = document.getElementById(checkBoxId);
-  if (checkBox.checked == true){
+  if (checkBox.checked == false){
     addLabel(labelAreaId, checkBoxId, label);
   } else {
     removeLabel(labelAreaId, checkBoxId, label);

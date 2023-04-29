@@ -1,0 +1,12 @@
+.dropdown-item {
+    position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+.dropdown-menu > .dropdown-item:hover > .dropdown-submenu {
+    display: block;
+}
