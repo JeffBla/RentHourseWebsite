@@ -15,7 +15,8 @@ router.get('/signin', (req, res, next) => {
 });
 /* eslint-disable no-unused-vars */
 router.get('/favorites', (req, res, next) => {
-	res.render('favorites');
+	const repo = new Repository('Supa Testing user');
+	res.render('favorites', { houses: repo.getHouses()});
 });
 /* eslint-disable no-unused-vars */
 
