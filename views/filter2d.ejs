@@ -11,7 +11,7 @@
         <div class="dropdown-item" onclick="myFunction('<%= labelAreaId %>','<%= checkBoxId %>','<%= label %>')">
           <input type="checkbox" class="form-check-input" id="<%= checkBoxId %>" onclick="this.checked=!this.checked;">
           <label class="form-check-label" for="<% checkBoxId %>">
-            <%= label %> &raquo
+            <%= label %>
           </label>
           <div class="dropdown-menu dropdown-submenu">
             <% for (var j = 0; j < options2d[i].length; j++) { %>
@@ -20,7 +20,7 @@
               <div class="dropdown-item" onclick="myFunction('<%= labelAreaId %>','<%= checkBoxId2 %>','<%= label+label2 %>')">
                 <input type="checkbox" class="form-check-input" id="<%= checkBoxId2 %>" onclick="this.checked=!this.checked;">
                 <label class="form-check-label" for="<% checkBoxId2 %>">
-                  <%= label2 %> &raquo
+                  <%= label2 %>
                 </label>
               </div>
             <% } %>
