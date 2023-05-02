@@ -53,6 +53,9 @@ function removeFilterData(key, value){
     }
   }
 }
+function setFilterData(key, value){
+  filter_data[key] = value;
+}
 
 // Don't close when clicking inside menu for every dropdown menus.
 const dropdownMenus = document.querySelectorAll('.dropdown-menu');
@@ -62,21 +65,23 @@ dropdownMenus.forEach(menu => {
   });
 })
 
-
 // Send filter data to server &
 // get those houses after submit button pressed.
 $(document).ready(function () {
-  $("#submitBtn").click(function () {
+
+  // initialize options for certain select bar
+  setFilterData('排序','默認排序');
+  setFilterData('筆數','12');
+
+  $(".update-house-btn").click(function () {
       // Make a POST request using $.ajax
       $.ajax({
           type: "POST",
           url: "/submit",
           data: filter_data,
           success: function (data) {
-            console.log(data);
               document.getElementById("houseItemsContainer").innerHTML = "";
               data.forEach((house) => {
-                console.log(house);
                   var renderedTemplate = ejs.render(house_item_template, { house : house });
                   document.getElementById("houseItemsContainer").innerHTML += renderedTemplate;
               });
