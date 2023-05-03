@@ -6,7 +6,6 @@ const SelectRentInfo_cover = (isAuth = false, limit = 10) => {
     "r.house_id=h.id",
     "h.map_object_id=m.id",
     "i_cover.house_id=r.image_id_cover",
-    "i.house_id=h.id",
   ];
 
   let joinTableCondStr = joinTableCond[0];
