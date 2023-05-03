@@ -14,14 +14,14 @@ const cn = {
 console.log(`connecting ${cn} ...`);
 const db = pgp(cn);
 
-db.connect()
-  .then((obj) => {
-    const serverVersion = obj.client.serverVersion;
-    console.log(serverVersion + " Connect Success");
-    obj.done();
-  })
-  .catch((error) => {
-    console.log("ERROR:", error.message || error);
-  });
+// db.connect()
+//   .then((obj) => {
+//     const serverVersion = obj.client.serverVersion;
+//     console.log(serverVersion + " Connect Success");
+//     obj.done();
+//   })
+//   .catch((error) => {
+//     console.log("ERROR:", error.message || error);
+//   });
 
 module.exports = db;
