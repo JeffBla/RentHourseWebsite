@@ -1,6 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <%- include('head.ejs', {title : '租屋網大集合'}) %>
     <body>
-        <h1>登入頁面, 請編輯signin.ejs</h1>
+        <%- include('navigation.ejs') %>
+        <!-- Header -->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Login</h1>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <h1>登入頁面</h1>
+        
+        <form action="/signin" method="POST">
+            <div class="bi-person-fill me-1">
+                <label for="username">Username</label>
+                <input type="username" class="form-control" id="username" name="username"
+                required>
+            </div>
+            <div class="bi bi-envelope-at-fill">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email"
+                required>
+            </div>
+            <div class="bi bi-lock">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password"
+                required>
+            </div>
+
+
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="bi-person-fill me-1"></i>
+                    Login
+                </button>
+            
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="bi bi-person-plus"></i>
+                    Register
+                </button>
+            
+        </form> 
+        <%- include('footer.ejs') %>    
     </body>
 </html>
