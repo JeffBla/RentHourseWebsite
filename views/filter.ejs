@@ -8,7 +8,7 @@
       <% for (var i = 0; i < options.length; i++) { %>
         <% let checkBoxId = "checkBox"+title+options[i] %>
         <% let label = options[i] %>
-        <div class="dropdown-item"  onclick="myFunction('<%= labelAreaId %>','<%= checkBoxId %>','<%= label %>')">
+        <div class="dropdown-item"  onclick="editFilter('<%= labelAreaId %>','<%= checkBoxId %>','<%= label %>','<%= title %>')">
           <!-- The Checkbox is only for display usage. -->
           <input type="checkbox" class="form-check-input" id="<%= checkBoxId %>" onclick="this.checked=!this.checked;">
           <label class="form-check-label" for="<% checkBoxId %>">
@@ -24,41 +24,3 @@
     -->
   </div>
 </div>
-
-<script>
-  function myFunction(labelAreaId, checkBoxId, label) {
-    var checkBox = document.getElementById(checkBoxId);
-    if (checkBox.checked == true){
-      addLabel(labelAreaId, checkBoxId, label);
-    } else {
-      removeLabel(labelAreaId, checkBoxId, label);
-    }
-  }
-  function addLabel(labelAreaId, checkBoxId, label){
-    // create & add tag
-    const labelArea = document.getElementById(labelAreaId);
-    const tag = document.createElement("span");
-    tag.id = labelAreaId+label;
-    tag.classList.add("badge", "bg-secondary", "mx-1");
-    tag.textContent = label;
-    const closeButton = document.createElement("button");
-    closeButton.classList.add("btn-close");
-    closeButton.setAttribute("aria-label", "Close");
-    closeButton.setAttribute("onClick", `removeLabel("${labelAreaId}", "${checkBoxId}", "${label}")`);
-    tag.appendChild(closeButton);
-    labelArea.appendChild(tag);
-
-    // check
-    var checkBox = document.getElementById(checkBoxId);
-    checkBox.checked = true;
-  }
-  function removeLabel(labelAreaId, checkBoxId, label){
-    // remove tag
-    const labelId = labelAreaId+label;
-    var label = document.getElementById(labelId);
-    label.parentNode.removeChild(label);
-    // uncheck
-    var checkBox = document.getElementById(checkBoxId);
-    checkBox.checked = false;
-  }
-</script>

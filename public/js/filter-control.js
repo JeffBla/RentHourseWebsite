@@ -1,9 +1,12 @@
-function myFunction(labelAreaId, checkBoxId, label) {
+// this function call when filter content changes
+function editFilter(labelAreaId, checkBoxId, label, title) {
   var checkBox = document.getElementById(checkBoxId);
   if (checkBox.checked == false){
     addLabel(labelAreaId, checkBoxId, label);
+    addFilterData(title, label);
   } else {
     removeLabel(labelAreaId, checkBoxId, label);
+    removeFilterData(title, label);
   }
 }
 function addLabel(labelAreaId, checkBoxId, label){
@@ -34,6 +37,26 @@ function removeLabel(labelAreaId, checkBoxId, label){
   checkBox.checked = false;
 }
 
+let filter_data = {}
+function addFilterData(key, value){
+  if(key in filter_data){
+    filter_data[key].push(value);
+  }else{
+    filter_data[key] = [value];
+  }
+}
+function removeFilterData(key, value){
+  if(key in filter_data){
+    filter_data[key] = filter_data[key].filter(item => item !== value);
+    if(filter_data[key].length == 0){
+      delete filter_data[key];
+    }
+  }
+}
+function setFilterData(key, value){
+  filter_data[key] = value;
+}
+
 // Don't close when clicking inside menu for every dropdown menus.
 const dropdownMenus = document.querySelectorAll('.dropdown-menu');
 dropdownMenus.forEach(menu => {
@@ -41,3 +64,32 @@ dropdownMenus.forEach(menu => {
     event.stopPropagation();
   });
 })
+
+// Send filter data to server &
+// get those houses after submit button pressed.
+$(document).ready(function () {
+
+  // initialize options for certain select bar
+  setFilterData('排序','默認排序');
+  setFilterData('筆數','12');
+
+  $(".update-house-btn").click(function () {
+      // Make a POST request using $.ajax
+      $.ajax({
+          type: "POST",
+          url: "/submit",
+          data: filter_data,
+          success: function (data) {
+              document.getElementById("houseItemsContainer").innerHTML = "";
+              data.forEach((house) => {
+                  var renderedTemplate = ejs.render(house_item_template, { house : house });
+                  document.getElementById("houseItemsContainer").innerHTML += renderedTemplate;
+              });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+              // Code to execute on error
+              console.log("Error: ", errorThrown);
+          }
+      });
+  });
+});

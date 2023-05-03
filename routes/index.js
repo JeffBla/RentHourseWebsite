@@ -19,11 +19,14 @@ router.get("/favorites", (req, res, next) => {
   res.render("favorites", { houses: repo.getHouses() });
 });
 /* eslint-disable no-unused-vars */
-router.post("/submit", (req, res, next) => {
-  console.log("選擇縣市：" + req.body.county);
-  console.log("選擇區域：" + req.body.district);
-  console.log("選擇型態：" + req.body.type);
-  console.log("選擇租金：" + req.body.price);
+
+router.post('/submit', (req, res, next) => {
+	console.log('data:\n'+JSON.stringify(req.body));
+	const repo = new Repository('Supa Testing user');
+	let sample_send_data = repo.getHouses();
+	sample_send_data.pop();
+	sample_send_data.pop();
+	res.json(sample_send_data);
 });
 
 module.exports = router;

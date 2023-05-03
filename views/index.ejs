@@ -32,22 +32,54 @@
                           </div>
                         </div>
                         <div class="col-3 p-3">
-                            <button id="submitBtn" type="submit" class="btn round bg-light w-100 h-100">搜尋</button>
+                            <button id="submitBtn" type="submit" class="btn round bg-light w-100 h-100 update-house-btn">搜尋</button>
                         </div>
                     </div>
                   </div>
                 </div>
                 <!-- filter end -->
             </div>
+            
         </header>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
+                    <div class="container-fluid">
+                        <!-- Buttons on the left, Pagination usage -->
+                        <div class="d-flex justify-content-start">
+                        </div>
+                    
+                    
+                        <!-- Dropdowns on the right, Displaying options -->
+                        <div class="d-flex justify-content-end">
+                        <% const dd_titles=['排序', '筆數']; %>
+                        <% const dd_contents=[['默認排序','刊登時間 近->遠','刊登時間 遠->近','更新時間 近->遠','更新時間 遠->近','房屋價格 低->高','房屋價格 高->低'],
+                                              ['12','24','48','96','196','392']]; %>
+                        <% for (var i = 0; i < 2; i++) { %>
+                            <% const dd_btn_id = 'ddBtn'+dd_titles[i]; %>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle unrounded-bottom" type="button" id="<%= dd_btn_id %>" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <%= dd_titles[i]+'：'+dd_contents[i][0] %>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="<%= dd_btn_id %>">
+                                    <% for (var j = 0; j < dd_contents[i].length; j++) { %>
+                                        <% const option_label = dd_titles[i]+'：'+dd_contents[i][j] %>
+                                        <a class="dropdown-item update-house-btn" onclick="setFilterData('<%= dd_titles[i] %>','<%= dd_contents[i][j] %>');document.getElementById('<%= dd_btn_id %>').innerHTML='<%= option_label %>'"><%= option_label %></a>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                    </nav>
+                <hr class="mt-0" style="width: 99%">
+                <div class="split-line"></div>
+                <div id="houseItemsContainer" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <% for (var i = 0; i < houses.length; i++) { %> 
                         <%- include('house_item.ejs', { house : houses[i] }); %> 
                     <% } %>
                 </div>
+                <hr>
             </div>
         </section>
         <%- include('footer.ejs') %>
