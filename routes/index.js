@@ -2,32 +2,13 @@
 
 const express = require("express");
 const router = new express.Router();
-const Repository = require("../src/repository");
-// test for db
-const db = require("../query");
+const houseCtrl = require("../controllers/house.controller");
 
 /* eslint-disable no-unused-vars */
-router.get("/", (req, res, next) => {
-  const repo = new Repository("Supa Testing user");
-  res.render("index", {
-    houses: repo.getHouses(),
-    filter_data: require("../filter_data.js"),
-  });
-});
+router.route("/").get(houseCtrl.houseSelect).post();
 
-router.get("/db", (req, res, next) => {
-  db.query("Select * From ${table:name}", {
-    table: "houseinfo",
-  }).then((data) => {
-    res.send(data);
-  });
-});
+router.route("/test").get(houseCtrl.test);
 
-// if want to render ejs file, just code like this
-// for font-end
-router.get("/test", (req, res, next) => {
-  res.render("index", { title: "Express", name: "TEST" });
-});
 /* eslint-disable no-unused-vars */
 router.get("/signin", (req, res, next) => {
   res.render("signin");
@@ -38,7 +19,6 @@ router.get("/favorites", (req, res, next) => {
   res.render("favorites", { houses: repo.getHouses() });
 });
 /* eslint-disable no-unused-vars */
-
 router.post("/submit", (req, res, next) => {
   console.log("選擇縣市：" + req.body.county);
   console.log("選擇區域：" + req.body.district);
