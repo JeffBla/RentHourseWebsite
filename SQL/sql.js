@@ -17,5 +17,7 @@ module.exports = {
   // external queries for Products:
   rentInfo: {
     selectCover: sql("rentInfo/selectRentInfo_cover.sql"),
+    selectCover_cover: sql("rentInfo/selectRentInfo_cover_count.sql"),
+    selectCoverAll_forTest: sql("rentInfo/selectRentInfo_coverAll_forTest.sql"),
   },
 };
