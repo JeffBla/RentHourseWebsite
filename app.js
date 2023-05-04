@@ -1,56 +1,58 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 // const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
-const routes = require('./routes/index');
-const status = require('./routes/status');
+const homeRoute = require("./routes/index.route.js");
+const userRoute = require("./routes/user.route.js");
+const status = require("./routes/status");
 
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', routes);
-app.use('/__health', status);
+app.use("/", homeRoute);
+app.use("/user", userRoute);
+app.use("/__health", status);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-	const err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+  const err = new Error("Not Found");
+  err.status = 404;
+  next(err);
 });
 
 /* eslint-disable no-unused-vars */
-if (app.get('env') === 'development') {
-	app.use((err, req, res, next) => {
-		res.status(err.status || 500);
-		res.json({
-			message: err.message,
-			error: err
-		});
-	});
+if (app.get("env") === "development") {
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.json({
+      message: err.message,
+      error: err,
+    });
+  });
 }
 
 app.use((err, req, res, next) => {
-	res.status(err.status || 500);
-	res.json({
-		message: err.message,
-		error: {}
-	});
+  res.status(err.status || 500);
+  res.json({
+    message: err.message,
+    error: {},
+  });
 });
 /* eslint-enable no-unused-vars */
 
