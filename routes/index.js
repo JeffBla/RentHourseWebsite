@@ -19,6 +19,10 @@ router.get("/favorites", (req, res, next) => {
   // res.render("favorites", { houses: repo.getHouses() });
 });
 /* eslint-disable no-unused-vars */
+router.get('/register', (req, res, next) => {
+	res.render('register');
+});
+/* eslint-disable no-unused-vars */
 
 router.post("/submit", (req, res, next) => {
   console.log("data:\n" + JSON.stringify(req.body));

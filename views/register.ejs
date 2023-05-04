@@ -7,14 +7,13 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Login</h1>
+                    <h1 class="display-4 fw-bolder">Register</h1>
                 </div>
             </div>
         </header>
         <!-- Section-->
-        <h1>登入頁面</h1>
-        
-        <form action="/signin" method="POST">
+        <h1>註冊頁面</h1>
+        <form action="/register" method="POST">
             <div class="bi-person-fill me-1">
                 <label for="username">Username</label>
                 <input type="username" class="form-control" id="username" name="username"
@@ -30,22 +29,28 @@
                 <input type="password" class="form-control" id="password" name="password"
                 required>
             </div>
+            <div class="bi bi-lock">
+                <label for="">Confirmed Password</label>
+                <input type="confirmedpassword" id="confirmedpassword" name="confirmedpassword"
+                required>
+            </div>
+            
+            
+            <button class="btn btn-outline-dark" type="button"
+            onClick="window.location.href='/signin'">
+                <i class="bi-person-fill me-1"></i>
+                Login Page
+            </button>
+            
+            
+            <button class="btn btn-outline-dark" type="submit" 
+            
+                <i class="bi bi-person-plus"></i>
+                Register
+            </button>
+            
 
-            
-                <button class="btn btn-outline-dark" type="submit">
-                    <i class="bi-person-fill me-1"></i>
-                    Login
-                </button>
-            
-
-                <button class="btn btn-outline-dark" type="button" 
-                onClick="window.location.href='/register'">
-                    <i class="bi bi-person-plus"></i>
-                    Register Page
-                    
-                </button>
-            
-        </form> 
-        <%- include('footer.ejs') %>    
+        </form>
+        <%- include('footer.ejs') %> 
     </body>
 </html>
