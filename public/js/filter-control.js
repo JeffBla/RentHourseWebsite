@@ -1,12 +1,12 @@
 // this function call when filter content changes
-function editFilter(labelAreaId, checkBoxId, label, title) {
+function editFilter(labelAreaId, checkBoxId, label, name) {
   var checkBox = document.getElementById(checkBoxId);
   if (checkBox.checked == false){
     addLabel(labelAreaId, checkBoxId, label);
-    addFilterData(title, label);
+    addFilterData(name, label);
   } else {
     removeLabel(labelAreaId, checkBoxId, label);
-    removeFilterData(title, label);
+    removeFilterData(name, label);
   }
 }
 function addLabel(labelAreaId, checkBoxId, label){
@@ -65,31 +65,61 @@ dropdownMenus.forEach(menu => {
   });
 })
 
-// Send filter data to server &
+// Render house items
+function renderHouseItems(houses){
+  document.getElementById("houseItemsContainer").innerHTML = "";
+  houses.forEach((house) => {
+      var renderedTemplate = ejs.render(house_item_template, { house : house });
+      document.getElementById("houseItemsContainer").innerHTML += renderedTemplate;
+  });
+}
+
+//Render page buttons
+function renderPageBtns(totalPage){
+  var renderedTemplate = ejs.render(page_btns_template, { currentPage : filter_data.page, totalPage : totalPage });
+  document.getElementById("pageBtns").innerHTML = renderedTemplate;
+  $(".page-link").click(function (){selectPage(this.innerHTML);});
+  $(".page-link").click(requestData);
+}
+
+// Function when page button pressed
+function selectPage(page){
+  if(page == "Previous"){
+    setFilterData('page', parseInt(filter_data['page'])-1);
+  }else if(page == "Next"){
+    setFilterData('page', parseInt(filter_data['page'])+1);
+  }else{
+    setFilterData('page', page);
+  }
+}
+
+
+// Send filter data to server
+function requestData() {
+  // Make a POST request using $.ajax
+  $.ajax({
+      type: "POST",
+      url: "/submit",
+      data: filter_data,
+      success: function (data) {
+        console.log(data);
+        renderHouseItems(data);
+        renderPageBtns(5);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+          // Code to execute on error
+          console.log("Error: ", errorThrown);
+      }
+  });
+}
+
 // get those houses after submit button pressed.
 $(document).ready(function () {
 
   // initialize options for certain select bar
+  setFilterData('page','1');
   setFilterData('排序','默認排序');
   setFilterData('筆數','12');
 
-  $(".update-house-btn").click(function () {
-      // Make a POST request using $.ajax
-      $.ajax({
-          type: "POST",
-          url: "/submit",
-          data: filter_data,
-          success: function (data) {
-              document.getElementById("houseItemsContainer").innerHTML = "";
-              data.forEach((house) => {
-                  var renderedTemplate = ejs.render(house_item_template, { house : house });
-                  document.getElementById("houseItemsContainer").innerHTML += renderedTemplate;
-              });
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-              // Code to execute on error
-              console.log("Error: ", errorThrown);
-          }
-      });
-  });
+  $(".update-house-btn").click(requestData());
 });
