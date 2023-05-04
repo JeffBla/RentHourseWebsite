@@ -8,7 +8,7 @@
       <% for (var i = 0; i < options.length; i++) { %>
         <% let checkBoxId = "checkBox"+title+options[i] %>
         <% let label = options[i] %>
-        <div class="dropdown-item" onclick="editFilter('<%= labelAreaId %>','<%= checkBoxId %>','<%= label %>','<%= title %>')">
+        <div class="dropdown-item" onclick="editFilter('<%= labelAreaId %>','<%= checkBoxId %>','<%= label %>','<%= name %>')">
           <input type="checkbox" class="form-check-input" id="<%= checkBoxId %>" onclick="this.checked=!this.checked;">
           <label class="form-check-label" for="<% checkBoxId %>">
             <%= label %>
@@ -17,7 +17,7 @@
             <% for (var j = 0; j < options2d[i].length; j++) { %>
               <% let checkBoxId2 = "checkBox"+title+options[i]+options2d[i][j] %>
               <% let label2 = options2d[i][j] %>
-              <div class="dropdown-item" onclick="editFilter('<%= labelAreaId %>','<%= checkBoxId2 %>','<%= label+label2 %>','<%= title %>')">
+              <div class="dropdown-item" onclick="editFilter('<%= labelAreaId %>','<%= checkBoxId2 %>','<%= label+label2 %>','<%= name %>')">
                 <input type="checkbox" class="form-check-input" id="<%= checkBoxId2 %>" onclick="this.checked=!this.checked;">
                 <label class="form-check-label" for="<% checkBoxId2 %>">
                   <%= label2 %>
@@ -35,21 +35,3 @@
     -->
   </div>
 </div>
-
-<script>
-  const dropdown = document.querySelector('.dropdown');
-  console.log(dropdown);
-
-document.addEventListener('click', (event) => {
-  // Check if the click target is inside the dropdown
-  if (!dropdown.contains(event.target)) {
-    // If not, close the dropdown
-    dropdown.querySelector('.dropdown-menu').classList.remove('show');
-  }
-});
-
-dropdown.addEventListener('click', () => {
-  // Toggle the dropdown menu when the button is clicked
-  dropdown.querySelector('.dropdown-menu').classList.toggle('show');
-});
-</script>
