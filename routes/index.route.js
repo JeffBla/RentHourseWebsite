@@ -5,7 +5,7 @@ const router = new express.Router();
 const houseCtrl = require("../controllers/house.controller");
 
 /* eslint-disable no-unused-vars */
-router.route("/").get(houseCtrl.houseSelect).post();
+router.route("/").get(houseCtrl.houseSelect);
 
 router.route("/test").get(houseCtrl.test);
 
@@ -37,7 +37,8 @@ router.post('/signin', (req, res, next) => {
 });
 
 
-router.post("/submit", (req, res, next) => {
+/* eslint-disable no-unused-vars */
+router.route("/submit").post((req, res, next) => {
   console.log("data:\n" + JSON.stringify(req.body));
   houseCtrl.test(req, res);
 });
