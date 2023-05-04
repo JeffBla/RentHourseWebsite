@@ -8,13 +8,17 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Login</h1>
+                    <style>
+                        .sign-form {
+                          padding: 81px;
+                        }
+                    </style>
                 </div>
             </div>
         </header>
         <!-- Section-->
         <h1>登入頁面</h1>
-        
-        <form action="/signin" method="POST">
+        <form class="sign-form" action="/signin" method="POST">
             <div class="bi-person-fill me-1">
                 <label for="username">Username</label>
                 <input type="username" class="form-control" id="username" name="username"
@@ -31,21 +35,21 @@
                 required>
             </div>
         </form>
-        <form class="d-flex mx-1" action="/signin" method="POST">
-                <button class="btn btn-outline-dark" type="button">
-                    <i class="bi-person-fill me-1"></i>
-                    Login
-                </button>
-        </form>
+            <form class="d-flex justify-content-center" action="/signin" method="POST">
+                    <button class="btn btn-outline-dark" type="button">
+                        <i class="bi-person-fill "></i>
+                        Login
+                    </button>
+            </form>
 
-        <form class="d-flex mx-1" action="/register" method="GET">
-                <button class="btn btn-outline-dark" type="submit" >
-                    <i class="bi bi-person-plus"></i>
-                    Register Page
+            <form class="d-flex justify-content-center" action="/register" method="GET">
+                    <button class="btn btn-outline-dark" type="submit" >
+                        <i class="bi bi-person-plus"></i>
+                        Register Page
                     
-                </button>
+                    </button>
             
-        </form> 
-        <%- include('footer.ejs') %>    
+            </form> 
+            <%- include('footer.ejs') %>    
     </body>
 </html>
