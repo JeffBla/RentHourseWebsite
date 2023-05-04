@@ -23,6 +23,19 @@ router.get('/register', (req, res, next) => {
 	res.render('register');
 });
 /* eslint-disable no-unused-vars */
+router.post('/register', (req, res, next) => {
+	const { username, email, password, confirmedpassword } = req.body;
+	// 在這裡處理註冊表單提交的數據
+	// ...
+	res.redirect('/signin'); // 跳轉到signin頁面
+});
+
+router.post('/signin', (req, res, next) => {
+	const { username, email, password} = req.body;
+	// 在這裡處理註冊表單提交的數據
+	// ...
+});
+
 
 router.post("/submit", (req, res, next) => {
   console.log("data:\n" + JSON.stringify(req.body));
