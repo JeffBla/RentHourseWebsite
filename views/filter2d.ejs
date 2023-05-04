@@ -35,21 +35,3 @@
     -->
   </div>
 </div>
-
-<script>
-  const dropdown = document.querySelector('.dropdown');
-  console.log(dropdown);
-
-document.addEventListener('click', (event) => {
-  // Check if the click target is inside the dropdown
-  if (!dropdown.contains(event.target)) {
-    // If not, close the dropdown
-    dropdown.querySelector('.dropdown-menu').classList.remove('show');
-  }
-});
-
-dropdown.addEventListener('click', () => {
-  // Toggle the dropdown menu when the button is clicked
-  dropdown.querySelector('.dropdown-menu').classList.toggle('show');
-});
-</script>
