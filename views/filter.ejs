@@ -8,7 +8,7 @@
       <% for (var i = 0; i < options.length; i++) { %>
         <% let checkBoxId = "checkBox"+title+options[i] %>
         <% let label = options[i] %>
-        <div class="dropdown-item"  onclick="editFilter('<%= labelAreaId %>','<%= checkBoxId %>','<%= label %>','<%= title %>')">
+        <div class="dropdown-item"  onclick="editFilter('<%= labelAreaId %>','<%= checkBoxId %>','<%= label %>','<%= name %>')">
           <!-- The Checkbox is only for display usage. -->
           <input type="checkbox" class="form-check-input" id="<%= checkBoxId %>" onclick="this.checked=!this.checked;">
           <label class="form-check-label" for="<% checkBoxId %>">

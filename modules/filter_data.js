@@ -438,6 +438,17 @@ module.exports = {
     "最短租期",
     "性別條件",
   ],
+  other_names: [
+    'identity',
+    'buildingTypes',
+    'size',
+    'floor',
+    'equipment',
+    'speciality',
+    'pattern',
+    'minRendPeriod',
+    'sexLimit',
+  ],
   other_options: [
     ["房東", "仲介", "代管", "代理人"],
     ["透天", "公寓", "電梯大樓", "別墅"],
