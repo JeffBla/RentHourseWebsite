@@ -30,16 +30,16 @@
                 <input type="password" class="form-control" id="password" name="password"
                 required>
             </div>
-
-            
-                <button class="btn btn-outline-dark" type="submit">
+        </form>
+        <form class="d-flex mx-1" action="/signin" method="POST">
+                <button class="btn btn-outline-dark" type="button">
                     <i class="bi-person-fill me-1"></i>
                     Login
                 </button>
-            
+        </form>
 
-                <button class="btn btn-outline-dark" type="button" 
-                onClick="window.location.href='/register'">
+        <form class="d-flex mx-1" action="/register" method="GET">
+                <button class="btn btn-outline-dark" type="submit" >
                     <i class="bi bi-person-plus"></i>
                     Register Page
                     
