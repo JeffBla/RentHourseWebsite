@@ -118,8 +118,9 @@ $(document).ready(function () {
 
   // initialize options for certain select bar
   setFilterData('page','1');
-  setFilterData('排序','默認排序');
-  setFilterData('筆數','12');
+  setFilterData('sortop','默認排序');
+  setFilterData('limit','12');
 
-  $(".update-house-btn").click(requestData());
+  requestData();
+  $(".update-house-btn").click(requestData);
 });
