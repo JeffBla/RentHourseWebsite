@@ -34,23 +34,28 @@
                 <input type="confirmedpassword" id="confirmedpassword" name="confirmedpassword"
                 required>
             </div>
-            
-            
-            <button class="btn btn-outline-dark" type="button"
-            onClick="window.location.href='/signin'">
-                <i class="bi-person-fill me-1"></i>
-                Login Page
-            </button>
-            
-            
-            <button class="btn btn-outline-dark" type="submit" 
+        </form>
+
+        <form class="d-flex mx-1" action="/register" method="POST">
+            <button class="btn btn-outline-dark" type="button" 
             
                 <i class="bi bi-person-plus"></i>
                 Register
             </button>
             
-
+            
         </form>
+
+        <form class="d-flex mx-1" action="/signin" method="GET">
+            <button class="btn btn-outline-dark" type="submit">
+                <i class="bi-person-fill me-1"></i>
+                Login Page
+            </button>
+        </form>    
+        
+        
+        
+        
         <%- include('footer.ejs') %> 
     </body>
 </html>
