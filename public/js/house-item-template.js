@@ -1,16 +1,18 @@
 const house_item_template = 
 `<div class="col mb-5">
-    <div class="card">
+    <div class="card" title="來源：<%= house.coming_from %>">
         <div class="h-100 btn p-0" onclick="window.open('<%= house.url %>', '_blank')">
             <!-- Product image-->
-            <img class="card-img-top" src="<%= house.imgUrl %>" alt="..." />
+            <img class="card-img-top" src="<%= house.img_url %>"/>
             <!-- Product details-->
             <div class="card-body p-4">
                 <div class="text-center">
                     <!-- Product name-->
-                    <h5 class="fw-bolder"><%= house.title %></h5>
+                    <div>
+                    <h5 class="fw-bolder multiline-ellipsis"><%= house.title %></h5>
+                    </div>
                     <!-- Product price-->
-                    $<%= house.price %> 元/月
+                    <p class="fs-5">$<%= Math.floor(house.price_permonth) %> 元/月</p>
                 </div>
             </div>
         </div>
