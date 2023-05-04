@@ -42,12 +42,13 @@
             
         </header>
         <!-- Section-->
-        <section class="py-5">
+        <section id="section" class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
                     <div class="container-fluid">
                         <!-- Buttons on the left, Pagination usage -->
                         <div class="d-flex justify-content-start">
+                            <p id="itemCnt" class="fs-4"></p>
                         </div>
                     
                     
@@ -80,6 +81,9 @@
                     <% } %>
                 </div>
                 <hr>
+
+                <div id="pageBtns" class="d-flex justify-content-center">
+                </div>
             </div>
         </section>
         <%- include('footer.ejs') %>

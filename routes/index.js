@@ -39,6 +39,7 @@ router.post('/signin', (req, res, next) => {
 
 router.post("/submit", (req, res, next) => {
   console.log("data:\n" + JSON.stringify(req.body));
+  houseCtrl.test(req, res);
 });
 
 module.exports = router;
