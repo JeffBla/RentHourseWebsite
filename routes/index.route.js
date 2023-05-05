@@ -7,7 +7,7 @@ const houseCtrl = require("../controllers/house.controller");
 /* eslint-disable no-unused-vars */
 router.route("/").get(houseCtrl.houseSelect);
 
-router.route("/test").get(houseCtrl.test);
+router.route("/testHouse").get(houseCtrl.SelectAllHouseData);
 
 /* eslint-disable no-unused-vars */
 router.get("/signin", (req, res, next) => {
@@ -38,9 +38,6 @@ router.post('/signin', (req, res, next) => {
 
 
 /* eslint-disable no-unused-vars */
-router.route("/submit").post((req, res, next) => {
-  console.log("data:\n" + JSON.stringify(req.body));
-  houseCtrl.test(req, res);
-});
+router.route("/submit").post(houseCtrl.submit_search);
 
 module.exports = router;

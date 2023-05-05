@@ -34,7 +34,7 @@ if (isAuth) {
 // console.log(...tables);
 console.log(
   pg.as.format(
-    "SELECT * FROM rent_info AS r, image AS i_cover, house AS h, map_object AS m, image AS i  WHERE ${joinTableCondStr:value} LIMIT ${limit:value} ",
+    "SELECT r.title, r.coming_from,    r.price_permonth, r.url,     i_cover.url AS img_url,      COUNT(*) AS pageCnt FROM   rent_info AS r,   image AS i_cover,   house AS h,   map_object AS m WHERE   ${joinTableCondStr:value} LIMIT ${limit:value}",
     {
       joinTableCondStr,
       limit,

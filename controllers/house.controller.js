@@ -15,7 +15,32 @@ const houseSelect = (req, res) => {
     });
 };
 
-const test = (req, res) => {
+const SelectAllHouseData = (req, res) => {
+  houseModule
+    .SelectAllRentInfo_cover_forTest(req.body.isAuth, req.body.limit)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      return res.send(err);
+    });
+};
+
+const submit_search = (req, res) => {
+  console.log("data:\n" + JSON.stringify(req.body));
+
+  houseModule
+    .SelectAllRentInfo_cover_forTest(req.body.isAuth, req.body.limit)
+    .then((result) => {
+      res.send(result);
+      //res.send({houses : result, pageCnt : ''});
+    })
+    .catch((err) => {
+      return res.send(err);
+    });
+};
+
+const testHouse = (req, res) => {
   houseModule
     .SelectRentInfo_cover(req.body.isAuth, req.body.limit)
     .then((result) => {
@@ -26,4 +51,4 @@ const test = (req, res) => {
     });
 };
 
-module.exports = { test, houseSelect };
+module.exports = { testHouse, houseSelect, SelectAllHouseData, submit_search };
