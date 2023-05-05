@@ -38,6 +38,6 @@ router.post('/signin', (req, res, next) => {
 
 
 /* eslint-disable no-unused-vars */
-router.route("/submit").post(houseCtrl.submit_search);
+router.route("/submit").post(houseCtrl.testHouse);
 
 module.exports = router;
