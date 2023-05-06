@@ -16,18 +16,19 @@ const SelectRentInfo_cover = (isAuth = false, limit = 10) => {
     db.connect()
       .then((obj) => {
         sco = obj;
-        rentInfo = sco.any(sql.rentInfo.selectCover, {
-          joinTableCondStr,
-          limit,
-        });
-        // pageCnt = sco.any(sql.rentInfo.selectCover_cover, {
-        //   joinTableCondStr,
-        // });
 
-        return rentInfo;
+        return Promise.all([
+          sco.any(sql.rentInfo.selectCover, {
+            joinTableCondStr,
+            limit,
+          }),
+          sco.any(sql.rentInfo.selectCover_cover, {
+            joinTableCondStr,
+          }),
+        ]);
       })
       .then((data) => {
-        console.log(rentInfo);
+        console.log(data);
         resolve(data);
       })
       .catch((error) => {
