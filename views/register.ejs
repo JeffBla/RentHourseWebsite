@@ -1,67 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('head.ejs', {title : '租屋網大集合'}) %>
-    <body>
-        <%- include('navigation.ejs') %>
-        <!-- Header -->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Register</h1>
-                    <style>
-                        .register-form {
-                          padding: 50px;
-                        }
-                    </style>
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-        <h1>註冊頁面</h1>
-        <form class="register-form" action="/register" method="POST">
-            <div class="bi-person-fill me-1">
-                <label for="username">Username</label>
-                <input type="username" class="form-control" id="username" name="username"
-                required>
-            </div>
-            <div class="bi bi-envelope-at-fill">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email"
-                required>
-            </div>
-            <div class="bi bi-lock">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password"
-                required>
-            </div>
-            <div class="bi bi-lock">
-                <label for="">Confirmed Password</label>
-                <input type="password" class="form-control" id="confirmedpassword" name="confirmedpassword"
-                required>
-            </div>
-        </form>
+  <%- include('head.ejs', {title : '租屋網大集合'}) %>
+  <body>
+    <%- include('navigation.ejs') %>
+    <!-- Header -->
+    <header class="bg-dark py-5">
+      <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Register</h1>
+          <style>
+            .register-form {
+              padding: 50px;
+            }
+          </style>
+        </div>
+      </div>
+    </header>
+    <!-- Section-->
+    <h1>註冊頁面</h1>
+    <form class="register-form" action="/user/register" method="POST">
+      <div class="bi-person-fill me-1">
+        <label for="username">Username</label>
+        <input
+          type="username"
+          class="form-control"
+          id="username"
+          name="username"
+          required
+        />
+      </div>
+      <div class="bi bi-envelope-at-fill">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="bi bi-lock">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          required
+        />
+      </div>
+      <div class="bi bi-lock">
+        <label for="">Confirmed Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="confirmedpassword"
+          name="confirmedpassword"
+          required
+        />
+      </div>
+    </form>
 
-        
-            <form class="d-flex justify-content-center" action="/register" method="POST">
-                <button class="btn btn-outline-dark me-2" type="submit">
-                    <i class="bi bi-person-plus me-1"></i>
-                    Register
-            </button>
-            
-            
-        </form>
+    <form
+      class="d-flex justify-content-center"
+      action="/user/register"
+      method="POST"
+    >
+      <button class="btn btn-outline-dark me-2" type="submit">
+        <i class="bi bi-person-plus me-1"></i>
+        Register
+      </button>
+    </form>
 
-        <form class="d-flex justify-content-center" action="/signin" method="GET">
-            <button class="btn btn-outline-dark" type="submit">
-                <i class="bi-person-fill me-1"></i>
-                Login Page
-            </button>
-        </form>    
-        
-        
-        
-        
-        
-        <%- include('footer.ejs') %> 
-    </body>
+    <form
+      class="d-flex justify-content-center"
+      action="/user/signin"
+      method="GET"
+    >
+      <button class="btn btn-outline-dark" type="submit">
+        <i class="bi-person-fill me-1"></i>
+        Login Page
+      </button>
+    </form>
+
+    <%- include('footer.ejs') %>
+  </body>
 </html>

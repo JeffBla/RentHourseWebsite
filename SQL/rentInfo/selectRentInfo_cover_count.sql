@@ -1,4 +1,4 @@
-SELECT COUNT(*)
+SELECT COUNT(*) AS item_cnt
 FROM rent_info AS r,
     image AS i_cover,
     house AS h,

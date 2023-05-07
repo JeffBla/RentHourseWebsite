@@ -48,7 +48,9 @@
                     <div class="container-fluid">
                         <!-- Buttons on the left, Pagination usage -->
                         <div class="d-flex justify-content-start">
-                            <p id="itemCnt" class="fs-4"></p>
+                            <p class="fs-3">一共有&nbsp;</p>
+                            <p id="itemCnt" class="fs-2 font-weight-bold" style="color: orange;"></p>
+                            <p class="fs-3">&nbsp;筆物件</p>
                         </div>
                     
                     
@@ -77,9 +79,6 @@
                 <hr class="mt-0" style="width: 99%">
                 <div class="split-line"></div>
                 <div id="houseItemsContainer" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <% for (var i = 0; i < houses.length; i++) { %> 
-                        <%- include('house_item.ejs', { house : houses[i] }); %> 
-                    <% } %>
                 </div>
                 <hr>
 

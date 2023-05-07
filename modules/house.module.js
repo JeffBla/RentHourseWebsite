@@ -1,7 +1,7 @@
 const db = require("./query");
 const sql = require("../SQL/sql");
 
-const SelectRentInfo_cover = (isAuth = false, limit = 10) => {
+const SelectRentInfo_cover = (isAuth = false, limit = 10, pageNum = 1) => {
   let joinTableCond = [
     "r.house_id=h.id",
     "h.map_object_id=m.id",
@@ -17,10 +17,12 @@ const SelectRentInfo_cover = (isAuth = false, limit = 10) => {
       .then((obj) => {
         sco = obj;
 
+        offect = limit * (pageNum - 1);
         return Promise.all([
           sco.any(sql.rentInfo.selectCover, {
             joinTableCondStr,
             limit,
+            offect,
           }),
           sco.any(sql.rentInfo.selectCover_cover, {
             joinTableCondStr,
@@ -28,7 +30,6 @@ const SelectRentInfo_cover = (isAuth = false, limit = 10) => {
         ]);
       })
       .then((data) => {
-        console.log(data);
         resolve(data);
       })
       .catch((error) => {

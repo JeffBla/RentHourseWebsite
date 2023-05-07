@@ -1,5 +1,5 @@
 -- SQLBook: Code
-SELECT r.title, r.coming_from,
+SELECT r.id, r.title, r.coming_from,
      r.price_permonth, r.url,
       i_cover.url AS img_url
 FROM
@@ -9,4 +9,4 @@ FROM
     map_object AS m
 WHERE
     ${joinTableCondStr:value}
-LIMIT ${limit:value}
+LIMIT ${limit:value} OFFSET ${offect:value}

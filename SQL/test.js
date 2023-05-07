@@ -18,7 +18,6 @@ let joinTableCond = [
   "r.house_id=h.id",
   "h.map_object_id=m.id",
   "i_cover.house_id=r.image_id_cover",
-  "i.house_id=h.id",
 ];
 
 let joinTableCondStr = joinTableCond[0];
@@ -34,7 +33,7 @@ if (isAuth) {
 // console.log(...tables);
 console.log(
   pg.as.format(
-    "SELECT r.title, r.coming_from,    r.price_permonth, r.url,     i_cover.url AS img_url,      COUNT(*) AS pageCnt FROM   rent_info AS r,   image AS i_cover,   house AS h,   map_object AS m WHERE   ${joinTableCondStr:value} LIMIT ${limit:value}",
+    "SELECT r.id, r.title, r.coming_from,    r.price_permonth, r.url,     i_cover.url AS img_url       FROM   rent_info AS r,   image AS i_cover,   house AS h,   map_object AS m WHERE   ${joinTableCondStr:value} LIMIT ${limit:value}",
     {
       joinTableCondStr,
       limit,
