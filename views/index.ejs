@@ -15,7 +15,7 @@
                   <div class="col-7 bg-white py-2 card rounded">
                     <div class="row justify-content-start">
                         <div class="col-9">
-                          <%- include('filter2d.ejs', {name : 'area', title : '地區', options : filter_data.counties, options2d : filter_data.districts}); %>
+                          <%- include('filter2d.ejs', {name : 'address', title : '地區', options : filter_data.counties, options2d : filter_data.districts}); %>
                           <%- include('filter.ejs', {name : 'types', title : '型態', options : filter_data.types}); %>
                           <%- include('filter.ejs', {name : 'prices', title : '租金', options : filter_data.prices}); %>
                           <button class="btn btn-link text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -56,7 +56,7 @@
                     
                         <!-- Dropdowns on the right, Displaying options -->
                         <div class="d-flex justify-content-end">
-                        <% const dd_names=['sortop', 'limit']; %>
+                        <% const dd_names=['order_by', 'limit']; %>
                         <% const dd_titles=['排序', '筆數']; %>
                         <% const dd_contents=[['默認排序','刊登時間 近->遠','刊登時間 遠->近','更新時間 近->遠','更新時間 遠->近','房屋價格 低->高','房屋價格 高->低'],
                                               ['12','24','48','96','196','392']]; %>
