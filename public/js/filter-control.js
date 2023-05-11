@@ -1,6 +1,8 @@
 // this function call when filter content changes
 function editFilter(labelAreaId, checkBoxId, label, name) {
+  console.log(label);
   var checkBox = document.getElementById(checkBoxId);
+  console.log(checkBox.checked);
   if (checkBox.checked == false) {
     addLabel(labelAreaId, checkBoxId, label);
     addFilterData(name, label);
@@ -33,8 +35,8 @@ function addLabel(labelAreaId, checkBoxId, label) {
 function removeLabel(labelAreaId, checkBoxId, label) {
   // remove tag
   const labelId = labelAreaId + label;
-  var label = document.getElementById(labelId);
-  label.parentNode.removeChild(label);
+  var _label = document.getElementById(labelId);
+  _label.parentNode.removeChild(_label);
   // uncheck
   var checkBox = document.getElementById(checkBoxId);
   checkBox.checked = false;
@@ -144,7 +146,7 @@ function renderHouseItems(houses) {
 
 //Render page buttons
 function renderPageBtns(totalPage) {
-  console.log(totalPage);
+  //console.log(totalPage);
   var renderedTemplate = ejs.render(page_btns_template, {
     currentPage: filter_data.page_num,
     totalPage: totalPage,
@@ -209,7 +211,7 @@ function requestData() {
     url: "/submit",
     data: getRequestData(),
     success: function (data) {
-      console.log(data);
+      //console.log(data);
       renderHouseItems(data[0]);
       renderPageBtns(
         Math.ceil(data[1][0].item_cnt / parseInt(filter_data.limit))
@@ -223,6 +225,27 @@ function requestData() {
   });
 }
 
+function disableSubmenu() {
+  // Disable submenu when the parent checkbox checked.
+  // Remove children label in label area at the same time.
+  let submenu = $(this).find(".dropdown-submenu");
+  let checkBox = $(this).find(".form-check-input")[0];
+  if (checkBox.checked) {
+    let checkBoxes = submenu.find(".form-check-input");
+    for( var i = 0; i < checkBoxes.length; i++){
+      if(checkBoxes[i].checked){
+        // remove the tag and the check
+        eval($(checkBoxes[i].parentNode).attr("onclick"));
+      }
+    }
+    submenu.find("*").prop("disabled", true);
+    console.log('check');
+  } else {
+    console.log('uncheck');
+    submenu.find("*").prop("disabled", false);
+  }
+}
+
 // get those houses after submit button pressed.
 $(document).ready(function () {
   // initialize options for certain select bar
@@ -232,4 +255,5 @@ $(document).ready(function () {
 
   requestData();
   $(".update-house-btn").click(requestData);
+  $(".disable-submenu").click(disableSubmenu);
 });
