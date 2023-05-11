@@ -19,7 +19,7 @@ const SelectAllHouseData = (req, res) => {
 };
 
 const submit_search = (req, res) => {
-  // console.log("data:\n" + JSON.stringify(req.body));
+   console.log("data:\n" + JSON.stringify(req.body));
 
   houseModule
     .SelectRentInfo_cover(req.body.isAuth, req.body.limit)

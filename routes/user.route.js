@@ -32,6 +32,7 @@ router
     const { username, email, password } = req.body;
     // 在這裡處理註冊表單提交的數據
     // ...
+    res.redirect("/"); // 跳轉到主頁面
   });
 
 router.route("/test").get((req, res) => {

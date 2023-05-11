@@ -60,6 +60,70 @@ function setFilterData(key, value) {
   filter_data[key] = value;
 }
 
+/*
+submit data: post "/sunmit"
+data : {
+    'page_num' : 目前頁碼,
+    'order_by' : 排序選項,
+    'limit' : 筆數,
+    'address' : [地區],
+    'types' : [房屋型態],
+    'prices' : [min, max],
+    'identity' : [刊登身份],
+    'house_type' : [建物型態],
+    'area' : [min,max],
+    'floor' : [min,max],
+    'facilities' : [設備],
+    'features' : [特色],
+    'layout' : [格局],
+    'min_rent_period' : [最短租期],
+    'gender_requirement' : [性別條件],
+  }
+*/
+function getRequestData(){
+  var data = {};
+  Object.assign(data, filter_data);
+  if("prices" in filter_data){
+    data.prices = [];
+    filter_data.prices.forEach(op => {
+      if(op.includes("~")){
+        data.prices.push(op.trim().split('~'));
+      }else if(op.includes("以下")){
+        data.prices.push([0,parseInt(op.trim())]);
+      }else if(op.includes("以上")){
+        data.prices.push([parseInt(op.trim()), 999999999]);
+      }
+    });
+  }
+  if("area" in filter_data){
+    data.area = [];
+    filter_data.area.forEach(op => {
+      if(op.includes("-")){
+        data.area.push(op.trim().replace("坪","").split('-'));
+      }else if(op.includes("以下")){
+        data.area.push([0,parseInt(op.trim())]);
+      }else if(op.includes("以上")){
+        data.area.push([parseInt(op.trim()), 999999999]);
+      }
+    });
+  }
+  if("floor" in filter_data){
+    data.floor = [];
+    filter_data.floor.forEach(op => {
+      if(op.includes("-")){
+        data.floor.push(op.trim().replace("層","").replace("樓","").split('-'));
+      }else if(op.includes("以下")){
+        data.floor.push([-999999999,parseInt(op.trim())]);
+      }else if(op.includes("以上")){
+        data.floor.push([parseInt(op.trim()), 999999999]);
+      }else{
+        data.floor.push([parseInt(op.trim()), parseInt(op.trim())]);
+      }
+    });
+  }
+  return data;
+}
+
 // Don't close when clicking inside menu for every dropdown menus.
 const dropdownMenus = document.querySelectorAll(".dropdown-menu");
 dropdownMenus.forEach((menu) => {
@@ -82,7 +146,7 @@ function renderHouseItems(houses) {
 function renderPageBtns(totalPage) {
   console.log(totalPage);
   var renderedTemplate = ejs.render(page_btns_template, {
-    currentPage: filter_data.page,
+    currentPage: filter_data.page_num,
     totalPage: totalPage,
   });
   document.getElementById("pageBtns").innerHTML = renderedTemplate;
@@ -100,13 +164,42 @@ function renderItemCnt(itemCnt) {
 // Function when page button pressed
 function selectPage(page) {
   if (page == "Previous") {
-    setFilterData("page", parseInt(filter_data["page"]) - 1);
+    setFilterData("page_num", parseInt(filter_data["page_num"]) - 1);
   } else if (page == "Next") {
-    setFilterData("page", parseInt(filter_data["page"]) + 1);
+    setFilterData("page_num", parseInt(filter_data["page_num"]) + 1);
   } else {
-    setFilterData("page", page);
+    setFilterData("page_num", page);
   }
 }
+
+/*
+submit data: post "/sunmit"
+request_data : {
+    'page_num' : 目前頁碼,
+    'order_by' : 排序選項,
+    'limit' : 筆數,
+    'address' : [地區],
+    'types' : [房屋型態],
+    'prices' : [min, max],
+    'identity' : [刊登身份],
+    'house_type' : [建物型態],
+    'area' : [坪數],
+    'floor' : [樓層],
+    'facilities' : [設備],
+    'features' : [特色],
+    'layout' : [格局],
+    'min_rent_period' : [最短租期],
+    'gender_requirement' : [性別條件],
+  }
+
+  response＿data :{
+    houses : {
+      id, title, url, img_url, price_permonth, coming_from, like（如果沒登入就是0）
+    },
+    like_cnt, //總共幾個like
+    item_cnt, //條件下u 共幾個item
+  }
+*/
 
 // Send filter data to server
 function requestData() {
@@ -114,7 +207,7 @@ function requestData() {
   $.ajax({
     type: "POST",
     url: "/submit",
-    data: filter_data,
+    data: getRequestData(),
     success: function (data) {
       console.log(data);
       renderHouseItems(data[0]);
@@ -133,8 +226,8 @@ function requestData() {
 // get those houses after submit button pressed.
 $(document).ready(function () {
   // initialize options for certain select bar
-  setFilterData("page", "1");
-  setFilterData("sortop", "默認排序");
+  setFilterData("page_num", "1");
+  setFilterData("order_by", "默認排序");
   setFilterData("limit", "12");
 
   requestData();
