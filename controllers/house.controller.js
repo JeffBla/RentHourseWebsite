@@ -19,10 +19,28 @@ const SelectAllHouseData = (req, res) => {
 };
 
 const submit_search = (req, res) => {
-   console.log("data:\n" + JSON.stringify(req.body));
+  console.log("data:\n" + JSON.stringify(req.body));
 
   houseModule
-    .SelectRentInfo_cover(req.body.isAuth, req.body.limit)
+    .SelectRentInfo_cover(
+      req.body.isAuth,
+      req.body.limit,
+      req.body.page_num,
+      req.body.order_by,
+      req.body.address,
+      req.body.types,
+      req.body.prices,
+      req.body.identity,
+      req.body.house_type,
+      req.body.area,
+      req.body.floor,
+      req.body.facilities,
+      req.body.features,
+      req.body.layout,
+      req.body.order_by,
+      req.body.min_rent_period,
+      req.body.gender_requirement
+    )
     .then((result) => {
       res.send(result);
     })

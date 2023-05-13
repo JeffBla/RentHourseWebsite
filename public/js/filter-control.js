@@ -4,14 +4,14 @@ function editFilter(labelAreaId, checkBoxId, label, name) {
   var checkBox = document.getElementById(checkBoxId);
   console.log(checkBox.checked);
   if (checkBox.checked == false) {
-    addLabel(labelAreaId, checkBoxId, label);
+    addLabel(labelAreaId, checkBoxId, label, name);
     addFilterData(name, label);
   } else {
-    removeLabel(labelAreaId, checkBoxId, label);
+    removeLabel(labelAreaId, checkBoxId, label, name);
     removeFilterData(name, label);
   }
 }
-function addLabel(labelAreaId, checkBoxId, label) {
+function addLabel(labelAreaId, checkBoxId, label, name) {
   // create & add tag
   const labelArea = document.getElementById(labelAreaId);
   const tag = document.createElement("span");
@@ -23,7 +23,8 @@ function addLabel(labelAreaId, checkBoxId, label) {
   closeButton.setAttribute("aria-label", "Close");
   closeButton.setAttribute(
     "onClick",
-    `removeLabel("${labelAreaId}", "${checkBoxId}", "${label}")`
+    `removeLabel("${labelAreaId}", "${checkBoxId}", "${label}");
+    removeFilterData("${name}","${label}");`
   );
   tag.appendChild(closeButton);
   labelArea.appendChild(tag);
@@ -68,11 +69,11 @@ data : {
     'page_num' : 目前頁碼,
     'order_by' : 排序選項,
     'limit' : 筆數,
-    'address' : [[縣市,鄉鎮市區]],
-    'types' : [房屋型態],
-    'prices' : [[min, max]],
-    'identity' : [刊登身份],
-    'house_type' : [建物型態],
+    'address' : [{city:縣市,district:鄉鎮市區}],
+    'house_type' : [房屋型態],
+    'price_permonth' : [[min, max]],
+    'published_by' : [刊登身份],
+    'building_type' : [建物型態],
     'area' : [[min,max]],
     'floor' : [[min,max]],
     'facilities' : [設備],
@@ -88,7 +89,7 @@ function getRequestData(){
   if("address" in filter_data){
     data.address = [];
     filter_data.address.forEach(op => {
-      data.address.push([op.substring(0,3), op.substring(3)]);
+      data.address.push({city: op.substring(0,3), district:op.substring(3)});
     });
   }
   if("prices" in filter_data){
@@ -127,6 +128,13 @@ function getRequestData(){
       }else{
         data.floor.push([parseInt(op.trim()), parseInt(op.trim())]);
       }
+    });
+  }
+  if("facilities" in filter_data){
+    data.facilities = [];
+    filter_data.facilities.forEach(op => {
+      if(op[0] == '有')data.facilities.push(op.substring(1));
+      else data.facilities.push(op);
     });
   }
   return data;
@@ -186,11 +194,11 @@ request_data : {
     'page_num' : 目前頁碼,
     'order_by' : 排序選項,
     'limit' : 筆數,
-    'address' : [[縣市,鄉鎮市區]],
-    'types' : [房屋型態],
-    'prices' : [[min, max]],
-    'identity' : [刊登身份],
-    'house_type' : [建物型態],
+    'address' : [{city:縣市,district:鄉鎮市區}],
+    'house_type' : [房屋型態],
+    'price_permonth' : [[min, max]],
+    'published_by' : [刊登身份],
+    'building_type' : [建物型態],
     'area' : [[min, max]],
     'floor' : [[min, max]],
     'facilities' : [設備],
