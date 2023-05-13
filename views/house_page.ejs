@@ -3,8 +3,8 @@
     <%- include('head.ejs', {title : '租屋網大集合'}) %>
     <body>
         <%- include('navigation.ejs') %>
-        <div class="container d-flex align-items-center justify-content-center p-0">
-            <div class="row m-0">
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="row">
                 <div col="col-12">
                     <!-- Images Start -->
                     <div id="carouselExampleIndicators" class="carousel image-container" data-ride="carousel">
@@ -14,13 +14,13 @@
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner">
-                            <div class="carousel-item active" style="width: 800px;height: 400px; background-color: #888;">
+                            <div class="carousel-item active" style="width: 80vw;height: 80vh; background-color: #888;">
                                 <img class="top-page-image container-image" src="<%= house_data.image_urls[0]%>" alt="First slide">
                             </div>
-                            <div class="carousel-item" style="width: 800px;height: 400px; background-color: #888;">
+                            <div class="carousel-item" style="width: 80vw;height: 80vh; background-color: #888;">
                                 <img class="top-page-image container-image" src="<%= house_data.image_urls[1]%>" alt="Second slide">
                             </div>
-                            <div class="carousel-item" style="width: 800px;height: 400px; background-color: #888;">
+                            <div class="carousel-item" style="width: 80vw;height: 80vh; background-color: #888;">
                                 <img class="top-page-image container-image" src="<%= house_data.image_urls[2]%>" alt="Third slide">
                             </div>
                         </div>
@@ -35,15 +35,28 @@
                     </div>
                     <!-- Images End -->
                     
-                    <h1 class="fw-bold my-3"><%= house_data.title %></h1>
-                    <div class="mb-3">
-                        <span class="mr-3 p-1 rounded" style="font-size: 20px; background-color: #609efb" ><%= house_data.features[0] %></span>
-                        <span class="mr-3 p-1 rounded" style="font-size: 20px; background-color: #609efb" ><%= house_data.features[1] %></span>
-                        <span class="mr-3 p-1 rounded" style="font-size: 20px; background-color: #609efb" ><%= house_data.features[2] %></span>
-                    </div>
-                    <p style="font-size: 24px; color: #444"><%= house_data.house_type %>&nbsp;|&nbsp;<%= house_data.area %>坪&nbsp;|&nbsp;<%= house_data.floor %>樓&nbsp;|&nbsp;<%= house_data.building_type %></p>
+                    <h1 class="fw-bold mt-3 mb-0"><%= house_data.title %></h1>
+                    原網址: <a href="<%= house_data.url %>" target="_blank"><%= house_data.url %></a>
+                    <p class="mt-3" style="font-size: 1.5rem; color: #444"><%= house_data.house_type %>&nbsp;|&nbsp;<%= house_data.area %>坪&nbsp;|&nbsp;<%= house_data.floor %>樓&nbsp;|&nbsp;<%= house_data.building_type %></p>
                     <p class="fw-bold" style="font-size:48px; color: orange">$&nbsp;<%= house_data.price_permonth %>&nbsp;元/月</p>
                     
+                    <hr class="mt-0" style="width: 99%">
+                    <p class="fw-bold" style="font-size: 1.5rem;">特色</p>
+                    <div class="mb-3">
+                        <% for (var i = 0; i < house_data.features.length; i++) { %>
+                            <span class="mr-3 p-1 rounded" style="font-size: 1.2rem; background-color: #609efb" ><%= house_data.features[i] %></span>
+                        <% } %>
+                    </div>
+                    <p class="fw-bold" style="font-size: 1.5rem;">設備</p>
+                    <div class="mb-3">
+                        <% for (var i = 0; i < house_data.facilities.length; i++) { %>
+                            <span class="mr-3 p-1 rounded" style="font-size: 1.2rem; background-color: #ecc664" ><%= house_data.facilities[i] %></span>
+                        <% } %>
+                    </div>
+
+                    <hr class="mt-0" style="width: 99%">
+                    <p class="fw-bold" style="font-size: 1.5rem;">描述</p>
+                    <p class="ml-2 paragraph" style="font-size: 1.2rem;"><%= house_data.other_desc %></p>
                 </div>
             </div>
         </div>

@@ -12,3 +12,8 @@
     top: 0;
     left: 0;
 }
+
+.paragraph {
+    word-wrap: break-word;
+    max-width: 30rem;
+}
