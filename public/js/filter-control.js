@@ -4,14 +4,14 @@ function editFilter(labelAreaId, checkBoxId, label, name) {
   var checkBox = document.getElementById(checkBoxId);
   console.log(checkBox.checked);
   if (checkBox.checked == false) {
-    addLabel(labelAreaId, checkBoxId, label);
+    addLabel(labelAreaId, checkBoxId, label, name);
     addFilterData(name, label);
   } else {
-    removeLabel(labelAreaId, checkBoxId, label);
+    removeLabel(labelAreaId, checkBoxId, label, name);
     removeFilterData(name, label);
   }
 }
-function addLabel(labelAreaId, checkBoxId, label) {
+function addLabel(labelAreaId, checkBoxId, label, name) {
   // create & add tag
   const labelArea = document.getElementById(labelAreaId);
   const tag = document.createElement("span");
@@ -23,7 +23,8 @@ function addLabel(labelAreaId, checkBoxId, label) {
   closeButton.setAttribute("aria-label", "Close");
   closeButton.setAttribute(
     "onClick",
-    `removeLabel("${labelAreaId}", "${checkBoxId}", "${label}")`
+    `removeLabel("${labelAreaId}", "${checkBoxId}", "${label}");
+    removeFilterData("${name}","${label}");`
   );
   tag.appendChild(closeButton);
   labelArea.appendChild(tag);
