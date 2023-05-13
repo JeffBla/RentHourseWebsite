@@ -92,15 +92,15 @@ function getRequestData(){
       data.address.push({city: op.substring(0,3), district:op.substring(3)});
     });
   }
-  if("prices" in filter_data){
-    data.prices = [];
-    filter_data.prices.forEach(op => {
+  if("price_permonth" in filter_data){
+    data.price_permonth = [];
+    filter_data.price_permonth.forEach(op => {
       if(op.includes("~")){
-        data.prices.push(op.trim().split('~'));
+        data.price_permonth.push(op.trim().split('~'));
       }else if(op.includes("以下")){
-        data.prices.push([0,parseInt(op.trim())]);
+        data.price_permonth.push([0,parseInt(op.trim())]);
       }else if(op.includes("以上")){
-        data.prices.push([parseInt(op.trim()), 999999999]);
+        data.price_permonth.push([parseInt(op.trim()), 999999999]);
       }
     });
   }
