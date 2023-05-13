@@ -5,3 +5,4 @@ FROM rent_info AS r,
     map_object AS m
 WHERE
     ${joinTableCondStr:value}
+    ${searchCondStr:raw}
