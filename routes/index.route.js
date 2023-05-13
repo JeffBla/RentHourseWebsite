@@ -19,7 +19,7 @@ router.route("/test-house-page").get((req, res) => {
             title : "近汐止火車站，上班族首選",
             house_id : "-1",
             price_permonth : "6000",
-            published_by : "-1",
+            published_by : "房東",
             house_type : "雅房",
             building_type : "透天",
             area : "6.2",
