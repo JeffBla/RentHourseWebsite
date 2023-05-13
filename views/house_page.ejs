@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('head.ejs', {title : '租屋網大集合'}) %>
+    <body>
+        <%- include('navigation.ejs') %>
+        <div class="container d-flex align-items-center justify-content-center p-0">
+            <div class="row m-0">
+                <div col="col-12">
+                    <!-- Images Start -->
+                    <div id="carouselExampleIndicators" class="carousel image-container" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="width: 800px;height: 400px; background-color: #888;">
+                                <img class="top-page-image container-image" src="<%= house_data.image_urls[0]%>" alt="First slide">
+                            </div>
+                            <div class="carousel-item" style="width: 800px;height: 400px; background-color: #888;">
+                                <img class="top-page-image container-image" src="<%= house_data.image_urls[1]%>" alt="Second slide">
+                            </div>
+                            <div class="carousel-item" style="width: 800px;height: 400px; background-color: #888;">
+                                <img class="top-page-image container-image" src="<%= house_data.image_urls[2]%>" alt="Third slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <!-- Images End -->
+                    
+                    <h1 class="fw-bold my-3"><%= house_data.title %></h1>
+                    <div class="mb-3">
+                        <span class="mr-3 p-1 rounded" style="font-size: 20px; background-color: #609efb" ><%= house_data.features[0] %></span>
+                        <span class="mr-3 p-1 rounded" style="font-size: 20px; background-color: #609efb" ><%= house_data.features[1] %></span>
+                        <span class="mr-3 p-1 rounded" style="font-size: 20px; background-color: #609efb" ><%= house_data.features[2] %></span>
+                    </div>
+                    <p style="font-size: 24px; color: #444"><%= house_data.house_type %>&nbsp;|&nbsp;<%= house_data.area %>坪&nbsp;|&nbsp;<%= house_data.floor %>樓&nbsp;|&nbsp;<%= house_data.building_type %></p>
+                    <p class="fw-bold" style="font-size:48px; color: orange">$&nbsp;<%= house_data.price_permonth %>&nbsp;元/月</p>
+                    
+                </div>
+            </div>
+        </div>
+
+        <%- include('footer.ejs') %>
+    </body>
+</html>
