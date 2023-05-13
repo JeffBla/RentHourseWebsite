@@ -1,4 +1,5 @@
 const pg = require("pg-promise");
+const sql = require("./sql");
 
 const limit = 50;
 let tables = {
@@ -17,7 +18,7 @@ let tablesAlias = {
 let joinTableCond = [
   "r.house_id=h.id",
   "h.map_object_id=m.id",
-  "i_cover.house_id=r.image_id_cover",
+  "i_cover.id=r.image_id_cover",
 ];
 
 let joinTableCondStr = joinTableCond[0];
@@ -40,3 +41,48 @@ console.log(
     }
   )
 );
+
+let offect = 0;
+let searchCondStr = " AND (house_type='雅房')";
+console.log(
+  pg.as.format(sql.rentInfo.selectCover, {
+    joinTableCondStr,
+    searchCondStr,
+    limit,
+    offect,
+  })
+);
+
+// let searchCondObj = {};
+
+// let prices = [
+//   ["5000", "10000"],
+//   ["10000", "20000"],
+//   ["20000", "30000"],
+// ];
+
+// function insertProperty_oneDimension(obj, propertyStr, property) {
+//   obj[propertyStr] = `(${propertyStr}=${property[0]}`;
+
+//   for (let i = 1; i < property.length; i++) {
+//     obj[propertyStr] += ` OR ${propertyStr}=${property[i]}`;
+//   }
+//   obj[propertyStr] += ")";
+// }
+
+// let house_type = ["分租套房", "雅房"];
+
+// // searchCondObj.prices = `( (price_permonth >= ${prices[0][0]} AND price_permonth <= ${prices[0][1]})`;
+
+// // for (let i = 1; i < prices.length; i++) {
+// //   searchCondObj.prices += ` OR (price_permonth >= ${prices[i][0]} AND price_permonth <= ${prices[i][1]})`;
+// // }
+// // searchCondObj.prices += " )";
+// if (Object.keys(searchCondObj) == 0) {
+//   console.log("1");
+// } else {
+//   console.log("2");
+// }
+
+// let a;
+// if (!a) console.log("a");
