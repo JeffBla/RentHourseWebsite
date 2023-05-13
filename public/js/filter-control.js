@@ -130,6 +130,13 @@ function getRequestData(){
       }
     });
   }
+  if("facilities" in filter_data){
+    data.facilities = [];
+    filter_data.facilities.forEach(op => {
+      if(op[0] == '有')data.facilities.push(op.substring(1));
+      else data.facilities.push(op);
+    });
+  }
   return data;
 }
 
