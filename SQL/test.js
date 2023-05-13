@@ -42,16 +42,16 @@ console.log(
   )
 );
 
-let offect = 0;
-let searchCondStr = " AND (house_type='雅房')";
-console.log(
-  pg.as.format(sql.rentInfo.selectCover, {
-    joinTableCondStr,
-    searchCondStr,
-    limit,
-    offect,
-  })
-);
+// let offect = 0;
+// let searchCondStr = " AND (house_type='雅房')";
+// console.log(
+//   pg.as.format(sql.rentInfo.selectCover, {
+//     joinTableCondStr,
+//     searchCondStr,
+//     limit,
+//     offect,
+//   })
+// );
 
 // let searchCondObj = {};
 
@@ -84,5 +84,9 @@ console.log(
 //   console.log("2");
 // }
 
-// let a;
-// if (!a) console.log("a");
+let a = [];
+if (a.length == 0) {
+  console.log(a);
+} else {
+  console.log("1");
+}

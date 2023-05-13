@@ -1,5 +1,5 @@
-const houseModule = require("../modules/house.module");
-const filter_data = require("../modules/filter_data");
+const houseModel = require("../models/house.model");
+const filter_data = require("../models/filter_data");
 
 const houseSelect = (req, res) => {
   res.render("index", {
@@ -8,7 +8,7 @@ const houseSelect = (req, res) => {
 };
 
 const SelectAllHouseData = (req, res) => {
-  houseModule
+  houseModel
     .SelectAllRentInfo_cover_forTest(req.body.isAuth, req.body.limit)
     .then((result) => {
       res.send(result);
@@ -21,7 +21,7 @@ const SelectAllHouseData = (req, res) => {
 const submit_search = (req, res) => {
   console.log("data:\n" + JSON.stringify(req.body));
 
-  houseModule
+  houseModel
     .SelectRentInfo_cover(
       req.body.isAuth,
       req.body.limit,
@@ -49,7 +49,7 @@ const submit_search = (req, res) => {
 };
 
 const testHouse = (req, res) => {
-  houseModule
+  houseModel
     .SelectRentInfo_cover(req.body.isAuth, req.body.limit)
     .then((result) => {
       res.send(result);

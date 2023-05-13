@@ -9,12 +9,9 @@ function sql(file) {
 
 module.exports = {
   // external queries for Users:
-  //   users: {
-  //     add: sql("users/create.sql"),
-  //     search: sql("users/search.sql"),
-  //     report: sql("users/report.sql"),
-  //   },
-  // external queries for Products:
+  users: {
+    add: sql("user/createUser.sql"),
+  },
   rentInfo: {
     selectCover: sql("rentInfo/selectRentInfo_cover.sql"),
     selectCover_count: sql("rentInfo/selectRentInfo_cover_count.sql"),
