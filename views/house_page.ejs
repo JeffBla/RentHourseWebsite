@@ -75,13 +75,13 @@
                     
                     <hr class="mt-0" style="width: 99%">
                     <p class="fw-bold" style="font-size: 1.5rem;">特色</p>
-                    <div class="mb-3">
+                    <div class="mb-3 mx-3">
                         <% for (var i = 0; i < house_data.features.length; i++) { %>
                             <span class="mr-3 p-1 rounded" style="font-size: 1.2rem; background-color: #609efb" ><%= house_data.features[i] %></span>
                         <% } %>
                     </div>
                     <p class="fw-bold" style="font-size: 1.5rem;">設備</p>
-                    <div class="mb-3">
+                    <div class="mb-3 mx-3">
                         <% for (var i = 0; i < house_data.facilities.length; i++) { %>
                             <span class="mr-3 p-1 rounded" style="font-size: 1.2rem; background-color: #ecc664" ><%= house_data.facilities[i] %></span>
                         <% } %>
@@ -89,7 +89,7 @@
 
                     <hr class="mt-0" style="width: 99%">
                     <p class="fw-bold" style="font-size: 1.5rem;">描述</p>
-                    <p class="ml-2 paragraph" style="font-size: 1.2rem;"><%= house_data.other_desc %></p>
+                    <p class="ml-2 paragraph mx-3" style="font-size: 1.2rem;"><%= house_data.other_desc %></p>
                 </div>
             </div>
         </div>
