@@ -64,7 +64,7 @@ function setFilterData(key, value) {
 }
 
 /*
-submit data: post "/sunmit"
+submit data: post "/submit"
 data : {
     'page_num' : 目前頁碼,
     'order_by' : 排序選項,
@@ -189,7 +189,7 @@ function selectPage(page) {
 }
 
 /*
-submit data: post "/sunmit"
+submit data: post "/submit"
 request_data : {
     'page_num' : 目前頁碼,
     'order_by' : 排序選項,
@@ -262,12 +262,14 @@ function disableSubmenu() {
 
 // get those houses after submit button pressed.
 $(document).ready(function () {
-  // initialize options for certain select bar
-  setFilterData("page_num", "1");
-  setFilterData("order_by", "默認排序");
-  setFilterData("limit", "12");
+  // initialize options for certain select bar, in home page
+  if (window.location.pathname === '/'){
+    setFilterData("page_num", "1");
+    setFilterData("order_by", "默認排序");
+    setFilterData("limit", "12");
 
-  requestData();
-  $(".update-house-btn").click(requestData);
-  $(".disable-submenu").click(disableSubmenu);
+    requestData();
+    $(".update-house-btn").click(requestData);
+    $(".disable-submenu").click(disableSubmenu);
+  }
 });

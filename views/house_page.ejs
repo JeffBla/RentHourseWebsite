@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('head.ejs', {title : '租屋網大集合'}) %>
+    <body>
+        <%- include('navigation.ejs') %>
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="row">
+                <div col="col-12">
+                    <!-- Images Start -->
+                    <div id="carouselExampleIndicators" class="carousel image-container" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="width: 80vw;height: 80vh; background-color: #888;">
+                                <img class="top-page-image container-image" src="<%= house_data.image_urls[0]%>" alt="First slide">
+                            </div>
+                            <div class="carousel-item" style="width: 80vw;height: 80vh; background-color: #888;">
+                                <img class="top-page-image container-image" src="<%= house_data.image_urls[1]%>" alt="Second slide">
+                            </div>
+                            <div class="carousel-item" style="width: 80vw;height: 80vh; background-color: #888;">
+                                <img class="top-page-image container-image" src="<%= house_data.image_urls[2]%>" alt="Third slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <!-- Images End -->
+                    
+                    <h2 class="fw-bold mt-3 mb-0"><%= house_data.title %></h1>
+                    <p class="fw-bold" style="font-size:48px;">$&nbsp;<%= house_data.price_permonth %>&nbsp;元/月</p>
+                    
+                    <hr class="mt-0" style="width: 99%">
+                    <p class="fw-bold" style="font-size: 1.5rem;">房屋資訊</p>
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <span class="fw-light" style="font-size: 1.5rem;">房屋型態&nbsp;</span>
+                            <span style="font-size: 1.5rem;"><%= house_data.house_type %></span>
+                            <br>
+                            <span class="fw-light" style="font-size: 1.5rem;">建物型態&nbsp;</span>
+                            <span style="font-size: 1.5rem;"><%= house_data.building_type %></span>
+                            <br>
+                            <span class="fw-light" style="font-size: 1.5rem;">性別限制&nbsp;</span>
+                            <span style="font-size: 1.5rem;"><%= house_data.gender_requirement %></span>
+                            <br>
+                            <span class="fw-light" style="font-size: 1.5rem;">來源網站&nbsp;</span>
+                            <span style="font-size: 1.5rem;"><%= house_data.coming_from %></span>
+                          </div>
+                          <div class="col-sm-8">
+                            <span class="fw-light" style="font-size: 1.5rem;">坪數&nbsp;</span>
+                            <span style="font-size: 1.5rem;"><%= house_data.area %></span>
+                            <br>
+                            <span class="fw-light" style="font-size: 1.5rem;">樓層&nbsp;</span>
+                            <span style="font-size: 1.5rem;"><%= house_data.floor %></span>
+                            <br>
+                            <span class="fw-light" style="font-size: 1.5rem;">格局&nbsp;</span>
+                            <span style="font-size: 1.5rem;"><%= house_data.layout %></span>
+                            <br>
+                            <span class="fw-light" style="font-size: 1.5rem;">地址&nbsp;</span>
+                            <span style="font-size: 1.5rem;"><%= house_data.address %></span>
+                          </div>
+                        </div>
+                        <span class="fw-light" style="font-size: 1.5rem;">原網址&nbsp;</span>
+                        <a href="<%= house_data.url %>" target="_blank"style="font-size: 1.5rem;"><%= house_data.url %></a>
+                      </div>
+                    
+                    <hr class="mt-0" style="width: 99%">
+                    <p class="fw-bold" style="font-size: 1.5rem;">特色</p>
+                    <div class="mb-3 mx-3">
+                        <% for (var i = 0; i < house_data.features.length; i++) { %>
+                            <span class="mr-3 p-1 rounded" style="font-size: 1.2rem; background-color: #609efb" ><%= house_data.features[i] %></span>
+                        <% } %>
+                    </div>
+                    <p class="fw-bold" style="font-size: 1.5rem;">設備</p>
+                    <div class="mb-3 mx-3">
+                        <% for (var i = 0; i < house_data.facilities.length; i++) { %>
+                            <span class="mr-3 p-1 rounded" style="font-size: 1.2rem; background-color: #ecc664" ><%= house_data.facilities[i] %></span>
+                        <% } %>
+                    </div>
+
+                    <hr class="mt-0" style="width: 99%">
+                    <p class="fw-bold" style="font-size: 1.5rem;">描述</p>
+                    <p class="ml-2 paragraph mx-3" style="font-size: 1.2rem;"><%= house_data.other_desc %></p>
+                </div>
+            </div>
+        </div>
+
+        <%- include('footer.ejs') %>
+    </body>
+</html>
