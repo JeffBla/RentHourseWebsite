@@ -58,8 +58,7 @@
                         <div class="d-flex justify-content-end">
                         <% const dd_names=['order_by', 'limit']; %>
                         <% const dd_titles=['排序', '筆數']; %>
-                        <% const dd_contents=[['默認排序','刊登時間 近->遠','刊登時間 遠->近','更新時間 近->遠','更新時間 遠->近','房屋價格 低->高','房屋價格 高->低'],
-                                              ['12','24','48','96','196','392']]; %>
+                        <% const dd_contents=[filter_data.order_by, filter_data.limit]; %>
                         <% for (var i = 0; i < 2; i++) { %>
                             <% const dd_btn_id = 'ddBtn'+dd_titles[i]; %>
                             <div class="dropdown">
