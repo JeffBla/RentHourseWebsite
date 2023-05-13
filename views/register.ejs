@@ -32,7 +32,7 @@
         <% } %>
 
 
-        <form class="register-form" action="/user/register" method="POST">
+        <form class="register-form" action="/user/register" method="POST" onsubmit="return confirmPassword()">
           <h1 class="text-center">註冊頁面</h1>
             <div class="bi-person-fill me-1">
                 <label for="username">Username</label>
@@ -61,6 +61,18 @@
                     Register
                 </button>
             </div>
+            <script>
+                function confirmPassword(){
+                    let pass = document.getElementById("password").value;
+                    let confirmPass = document.getElementById("confirmedpassword").value;
+                    if(pass === confirmPass){
+                        return true;
+                    }else{
+                        alert("Password is not same as confirmed password.");
+                        return false;
+                    }
+                }
+            </script>
             
         </form>
         <form class="d-flex justify-content-center" action="/user/signin" method="GET">
