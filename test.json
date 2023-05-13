@@ -1,0 +1,25 @@
+{
+    'page_num' : 目前頁碼,
+    'order_by' : 排序選項,
+    'limit' : 筆數,
+    'address' : [地區],
+    'types' : [房屋型態],
+    'prices' : [min, max],
+    'identity' : [刊登身份],
+    'house_type' : [建物型態],
+    'area' : [坪數],
+    'floor' : [樓層],
+    'facilities' : [設備],
+    'features' : [特色],
+    'layout' : [格局],
+    'min_rent_period' : [最短租期],
+    'gender_requirement' : [性別條件],
+  }
+
+  {
+    houses : {
+      id, title, url, img_url, price_permonth, coming_from, like（如果沒登入就是0）
+    },
+    like_cnt, //總共幾個like
+    item_cnt, //條件下u 共幾個item
+  }
