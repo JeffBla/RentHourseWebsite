@@ -406,7 +406,7 @@ module.exports = {
     ],
     ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"],
   ],
-  types: [
+  house_type: [
     "整層住家",
     "獨立套房",
     "分租套房",
@@ -419,7 +419,7 @@ module.exports = {
     "土地",
     "其他",
   ],
-  prices: [
+  price_permonth: [
     "5000以下",
     "5000~10000",
     "10000~20000",
@@ -439,8 +439,8 @@ module.exports = {
     "性別條件",
   ],
   other_names: [
-    'identity',
-    'house_type',
+    'published_by',
+    'building_type',
     'area',
     'floor',
     'facilities',

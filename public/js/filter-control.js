@@ -68,13 +68,13 @@ data : {
     'page_num' : 目前頁碼,
     'order_by' : 排序選項,
     'limit' : 筆數,
-    'address' : [地區],
-    'types' : [房屋型態],
-    'prices' : [min, max],
-    'identity' : [刊登身份],
-    'house_type' : [建物型態],
-    'area' : [min,max],
-    'floor' : [min,max],
+    'address' : [{city:縣市,district:鄉鎮市區}],
+    'house_type' : [房屋型態],
+    'price_permonth' : [[min, max]],
+    'published_by' : [刊登身份],
+    'building_type' : [建物型態],
+    'area' : [[min,max]],
+    'floor' : [[min,max]],
     'facilities' : [設備],
     'features' : [特色],
     'layout' : [格局],
@@ -85,6 +85,12 @@ data : {
 function getRequestData(){
   var data = {};
   Object.assign(data, filter_data);
+  if("address" in filter_data){
+    data.address = [];
+    filter_data.address.forEach(op => {
+      data.address.push({city: op.substring(0,3), district:op.substring(3)});
+    });
+  }
   if("prices" in filter_data){
     data.prices = [];
     filter_data.prices.forEach(op => {
@@ -180,13 +186,13 @@ request_data : {
     'page_num' : 目前頁碼,
     'order_by' : 排序選項,
     'limit' : 筆數,
-    'address' : [地區],
-    'types' : [房屋型態],
-    'prices' : [min, max],
-    'identity' : [刊登身份],
-    'house_type' : [建物型態],
-    'area' : [坪數],
-    'floor' : [樓層],
+    'address' : [{city:縣市,district:鄉鎮市區}],
+    'house_type' : [房屋型態],
+    'price_permonth' : [[min, max]],
+    'published_by' : [刊登身份],
+    'building_type' : [建物型態],
+    'area' : [[min, max]],
+    'floor' : [[min, max]],
     'facilities' : [設備],
     'features' : [特色],
     'layout' : [格局],

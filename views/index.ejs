@@ -16,8 +16,8 @@
                     <div class="row justify-content-start">
                         <div class="col-9">
                           <%- include('filter2d.ejs', {name : 'address', title : '地區', options : filter_data.counties, options2d : filter_data.districts}); %>
-                          <%- include('filter.ejs', {name : 'types', title : '型態', options : filter_data.types}); %>
-                          <%- include('filter.ejs', {name : 'prices', title : '租金', options : filter_data.prices}); %>
+                          <%- include('filter.ejs', {name : 'house_type', title : '型態', options : filter_data.house_type}); %>
+                          <%- include('filter.ejs', {name : 'price_permonth', title : '租金', options : filter_data.price_permonth}); %>
                           <button class="btn btn-link text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <i class="bi bi-chevron-down me-2"></i>
                             更多選項
