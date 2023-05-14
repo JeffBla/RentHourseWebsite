@@ -160,7 +160,7 @@ function renderHouseItems(houses) {
 }
 
 //Render page buttons
-function renderPageBtns(totalPage) {
+function renderPageBtns(totalPage, postUrl) {
   //console.log(totalPage);
   var renderedTemplate = ejs.render(page_btns_template, {
     currentPage: filter_data.page_num,
@@ -170,7 +170,9 @@ function renderPageBtns(totalPage) {
   $(".page-link").click(function () {
     selectPage(this.innerHTML);
   });
-  $(".page-link").click(requestData);
+  $(".page-link").click(function(){
+    requestData(postUrl);
+  });
 }
 
 //Render page buttons
@@ -229,7 +231,8 @@ function requestData(url) {
       //console.log(data);
       renderHouseItems(data[0]);
       renderPageBtns(
-        Math.ceil(data[1][0].item_cnt / parseInt(filter_data.limit))
+        Math.ceil(data[1][0].item_cnt / parseInt(filter_data.limit)),
+        url
       );
       renderItemCnt(data[1][0].item_cnt);
     },
