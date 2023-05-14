@@ -6,6 +6,8 @@ const passport = require("passport");
 
 const userCtrl = require("../controllers/user.controller");
 
+const filter_data = require("../models/filter_data");
+
 /* eslint-disable no-unused-vars */
 router
   .route("/register")
@@ -37,7 +39,10 @@ router.route("/").get(userCtrl.ensureAuthenticated, (req, res) => {
   // console.log(req.user.name);
   // console.log(req.user.password);
   // console.log(req.user.email);
-  res.render("userHome");
+  console.log(JSON.stringify(req.user));
+  res.render("userHome", {
+    filter_data: filter_data,
+  });
 });
 
 /* eslint-disable no-unused-vars */

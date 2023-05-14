@@ -14,10 +14,11 @@ function requestLike(likeIconId, rentInfoId){
         url: "/like/check",
         data: {rent_info_id : rentInfoId},
         success: function (data) {
+            //console.log(data);
             if(data == true){
                 let likeIcon = document.getElementById(likeIconId);
-                likeIcon.removeClass('bi-heart-fill');
-                likeIcon.addClass('bi-heart');
+                likeIcon.classList.remove('bi-heart');
+                likeIcon.classList.add('bi-heart-fill');
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -29,14 +30,14 @@ function requestLike(likeIconId, rentInfoId){
 
 function requestUnlike(likeIconId, rentInfoId){
     $.ajax({
-        type: "POST",
+        type: "DELETE",
         url: "/like/uncheck",
         data: {rent_info_id : rentInfoId},
         success: function (data) {
             if(data == true){
                 let likeIcon = document.getElementById(likeIconId);
-                likeIcon.removeClass('bi-heart');
-                likeIcon.addClass('bi-heart-fill');
+                likeIcon.classList.remove('bi-heart-fill');
+                likeIcon.classList.add('bi-heart');
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
