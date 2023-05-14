@@ -141,7 +141,7 @@ function getRequestData(){
 }
 
 // Don't close when clicking inside menu for every dropdown menus.
-const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+const dropdownMenus = document.querySelectorAll(".dropdown-menu-stay");
 dropdownMenus.forEach((menu) => {
   menu.addEventListener("click", (event) => {
     event.stopPropagation();
