@@ -17,9 +17,7 @@ router
 /* eslint-disable no-unused-vars */
 router
   .route("/signin")
-  .get((req, res, next) => {
-    res.render("signin");
-  })
+  .get(userCtrl.userSignInGet)
   .post(
     passport.authenticate("signin", {
       failureRedirect: "/user/signin",
@@ -34,8 +32,30 @@ router.route("/flashtest").get((req, res) => {
 });
 
 /* eslint-disable no-unused-vars */
-router.route("/id/:username").get((req, res) => {
+router.route("/").get(userCtrl.ensureAuthenticated, (req, res) => {
+  // console.log(req.user.id);
+  // console.log(req.user.name);
+  // console.log(req.user.password);
+  // console.log(req.user.email);
   res.render("userHome");
+});
+
+/* eslint-disable no-unused-vars */
+router
+  .route("/signout")
+  .post(userCtrl.ensureAuthenticated, (req, res, next) => {
+    // clear req.user property and clear the login session (if any).
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/");
+    });
+  });
+
+router.route("/flashtest").get((req, res) => {
+  req.flash("success_flash", "You are logged out");
+  res.send(req.flash("success_flash"));
 });
 
 module.exports = router;

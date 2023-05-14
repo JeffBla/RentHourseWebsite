@@ -29,8 +29,20 @@ const userRegisterPost = async (req, res) => {
   }
 };
 
-const userSignInSuss = (req, res) => {
-  res.redirect(`/users/id/${req.body.username}`);
+const userSignInGet = (req, res) => {
+  if (req.user) {
+    return res.redirect("/user");
+  }
+  res.render("signin");
 };
 
-module.exports = { ensureAuthenticated, userSignInSuss, userRegisterPost };
+const userSignInSuss = (req, res) => {
+  res.redirect("/user");
+};
+
+module.exports = {
+  ensureAuthenticated,
+  userSignInGet,
+  userSignInSuss,
+  userRegisterPost,
+};

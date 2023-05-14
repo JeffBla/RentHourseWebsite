@@ -14,6 +14,7 @@ module.exports = {
   },
   like: {
     add: sql("like/likeCheck.sql"),
+    delete: sql("like/likeUncheck.sql"),
   },
   rentInfo: {
     selectCover: sql("rentInfo/selectRentInfo_cover.sql"),
