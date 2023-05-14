@@ -23,3 +23,10 @@
     like_cnt, //總共幾個like
     item_cnt, //條件下u 共幾個item
   }
+
+  {
+    houses : {
+      id, title, url, img_url, price_permonth, coming_from, like（如果沒登入就是0）
+    },
+    like_cnt, //總共幾個like
+  }
