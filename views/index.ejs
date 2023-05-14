@@ -90,12 +90,16 @@
             // get those houses after submit button pressed.
             $(document).ready(function () {
             // initialize options for certain select bar, in home page
+                clearFilterData();
                 setFilterData("page_num", "1");
                 setFilterData("order_by", "默認排序");
                 setFilterData("limit", "12");
 
-                requestData();
-                $(".update-house-btn").click(requestData);
+                const postUrl = '/submit';
+                requestData(postUrl);
+                $(".update-house-btn").click(function(){
+                    requestData(postUrl);
+                });
                 $(".disable-submenu").click(disableSubmenu);
             });
         </script>

@@ -10,17 +10,69 @@
                     <h1 class="display-4 fw-bolder">我的收藏</h1>
                 </div>
             </div>
+            
         </header>
         <!-- Section-->
-        <section class="py-5">
+        <section id="section" class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <% for (var i = 0; i < houses.length; i++) { %> 
-                        <%- include('house_item.ejs', { house : houses[i] }); %> 
-                    <% } %>
+                <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
+                    <div class="container-fluid">
+                        <!-- Buttons on the left, Pagination usage -->
+                        <div class="d-flex justify-content-start">
+                            <p class="fs-3">一共有&nbsp;</p>
+                            <p id="likeCnt" class="fs-2 font-weight-bold" style="color: orange;"></p>
+                            <p class="fs-3">&nbsp;筆收藏</p>
+                        </div>
+                    
+                    
+                        <!-- Dropdowns on the right, Displaying options -->
+                        <div class="d-flex justify-content-end">
+                        <% const dd_names=['order_by', 'limit']; %>
+                        <% const dd_titles=['排序', '筆數']; %>
+                        <% const dd_contents=[filter_data.order_by, filter_data.limit]; %>
+                        <% for (var i = 0; i < 2; i++) { %>
+                            <% const dd_btn_id = 'ddBtn'+dd_titles[i]; %>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle unrounded-bottom" type="button" id="<%= dd_btn_id %>" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <%= dd_titles[i]+'：'+dd_contents[i][0] %>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="<%= dd_btn_id %>">
+                                    <% for (var j = 0; j < dd_contents[i].length; j++) { %>
+                                        <% const option_label = dd_titles[i]+'：'+dd_contents[i][j] %>
+                                        <a class="dropdown-item update-house-btn" onclick="setFilterData('<%= dd_names[i] %>','<%= dd_contents[i][j] %>');document.getElementById('<%= dd_btn_id %>').innerHTML='<%= option_label %>'"><%= option_label %></a>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                    </nav>
+                <hr class="mt-0" style="width: 99%">
+                <div class="split-line"></div>
+                <div id="houseItemsContainer" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                </div>
+                <hr>
+
+                <div id="pageBtns" class="d-flex justify-content-center">
                 </div>
             </div>
         </section>
         <%- include('footer.ejs') %>
+        <script>
+            // get those houses after submit button pressed.
+            $(document).ready(function () {
+            // initialize options for certain select bar, in home page
+                clearFilterData();
+                setFilterData("page_num", "1");
+                setFilterData("order_by", "默認排序");
+                setFilterData("limit", "12");
+
+                const postUrl = '/user/favorite';
+                requestData(postUrl);
+                $(".update-house-btn").click(function(){
+                    requestData(postUrl);
+                });
+                $(".disable-submenu").click(disableSubmenu);
+            });
+        </script>
     </body>
 </html>

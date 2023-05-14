@@ -60,6 +60,9 @@ function removeFilterData(key, value) {
 function setFilterData(key, value) {
   filter_data[key] = value;
 }
+function clearFilterData(){
+  filter_data = {};
+}
 
 /*
 submit data: post "/submit"
@@ -216,11 +219,11 @@ request_data : {
 */
 
 // Send filter data to server
-function requestData() {
+function requestData(url) {
   // Make a POST request using $.ajax
   $.ajax({
     type: "POST",
-    url: "/submit",
+    url: url,
     data: getRequestData(),
     success: function (data) {
       //console.log(data);
