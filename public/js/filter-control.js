@@ -175,9 +175,15 @@ function renderPageBtns(totalPage, postUrl) {
   });
 }
 
-//Render page buttons
+//Render number of item
 function renderItemCnt(itemCnt) {
-  document.getElementById("itemCnt").innerHTML = itemCnt;
+  var _itemCnt = document.getElementById("itemCnt");
+  if(_itemCnt)_itemCnt.innerHTML = itemCnt;
+}
+//Render number of liked item
+function renderLikeCnt(likeCnt) {
+  var _likeCnt = document.getElementById("likeCnt");
+  if(_likeCnt)_likeCnt.innerHTML = likeCnt;
 }
 
 // Function when page button pressed
@@ -220,6 +226,19 @@ request_data : {
   }
 */
 
+function parseResponseData(data){
+  var item_cnt, like_cnt;
+  var houses = data[0];
+  if(data[1][0].item_cnt) item_cnt = data[1][0].item_cnt;
+  if(data[1][0].like_cnt) like_cnt = data[1][0].like_cnt;
+  if(data.length>=3 && data[2][0].item_cnt) item_cnt = data[2][0].item_cnt;
+  if(data.length>=3 && data[2][0].like_cnt) like_cnt = data[2][0].like_cnt;
+  if(!item_cnt){
+    item_cnt = like_cnt;
+  }
+  return [houses, item_cnt, like_cnt];
+}
+
 // Send filter data to server
 function requestData(url) {
   // Make a POST request using $.ajax
@@ -229,12 +248,15 @@ function requestData(url) {
     data: getRequestData(),
     success: function (data) {
       //console.log(data);
-      renderHouseItems(data[0]);
+      var [houses, itemCnt, likeCnt] = parseResponseData(data);
+      //console.log([houses, itemCnt, likeCnt])
+      renderHouseItems(houses);
       renderPageBtns(
-        Math.ceil(data[1][0].item_cnt / parseInt(filter_data.limit)),
+        Math.ceil(itemCnt / parseInt(filter_data.limit)),
         url
       );
-      renderItemCnt(data[1][0].item_cnt);
+      renderItemCnt(itemCnt);
+      renderLikeCnt(likeCnt);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       // Code to execute on error
