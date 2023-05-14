@@ -101,7 +101,6 @@ app.use(function (req, res, next) {
   res.locals.success_flash = req.flash("success_flash");
   res.locals.error_flash = req.flash("error_flash");
   res.locals.currentUser = req.user || null;
-  // res.locals.error = req.flash('error');
   next();
 });
 

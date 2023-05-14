@@ -243,6 +243,9 @@ const SelectRentInfo_cover = (
               joinTableCondStr,
               searchCondStr,
             }),
+            sco.any(sql.rentInfo.selectCover_likeCount, {
+              user_id,
+            }),
           ]);
         })
         .then((data) => {
