@@ -2,12 +2,9 @@
 
 const express = require("express");
 const router = new express.Router();
-const houseCtrl = require("../controllers/house.controller");
+const passport = require("passport");
 
-/* eslint-disable no-unused-vars */
-router.route("/").get((req, res) => {
-  res.send("user");
-});
+const userCtrl = require("../controllers/user.controller");
 
 /* eslint-disable no-unused-vars */
 router
@@ -15,12 +12,7 @@ router
   .get((req, res, next) => {
     res.render("register");
   })
-  .post((req, res, next) => {
-    const { username, email, password, confirmedpassword } = req.body;
-    // 在這裡處理註冊表單提交的數據
-    // ...
-    res.redirect("/user/signin"); // 跳轉到signin頁面
-  });
+  .post(userCtrl.userRegisterPost);
 
 /* eslint-disable no-unused-vars */
 router
@@ -28,15 +20,22 @@ router
   .get((req, res, next) => {
     res.render("signin");
   })
-  .post((req, res, next) => {
-    const { username, email, password } = req.body;
-    // 在這裡處理註冊表單提交的數據
-    // ...
-    res.redirect("/"); // 跳轉到主頁面
-  });
+  .post(
+    passport.authenticate("signin", {
+      failureRedirect: "/user/signin",
+      failureFlash: true,
+    }),
+    userCtrl.userSignInSuss
+  );
 
 router.route("/test").get((req, res) => {
-  res.send("test");
+  req.flash("success_flash", "You are logged out");
+  res.send(req.flash("success_flash"));
+});
+
+/* eslint-disable no-unused-vars */
+router.route("/id/:username").get((req, res) => {
+  res.send("user");
 });
 
 module.exports = router;

@@ -1,8 +1,6 @@
 // this function call when filter content changes
 function editFilter(labelAreaId, checkBoxId, label, name) {
-  console.log(label);
   var checkBox = document.getElementById(checkBoxId);
-  console.log(checkBox.checked);
   if (checkBox.checked == false) {
     addLabel(labelAreaId, checkBoxId, label, name);
     addFilterData(name, label);
@@ -92,15 +90,15 @@ function getRequestData(){
       data.address.push({city: op.substring(0,3), district:op.substring(3)});
     });
   }
-  if("prices" in filter_data){
-    data.prices = [];
-    filter_data.prices.forEach(op => {
+  if("price_permonth" in filter_data){
+    data.price_permonth = [];
+    filter_data.price_permonth.forEach(op => {
       if(op.includes("~")){
-        data.prices.push(op.trim().split('~'));
+        data.price_permonth.push(op.trim().split('~'));
       }else if(op.includes("以下")){
-        data.prices.push([0,parseInt(op.trim())]);
+        data.price_permonth.push([0,parseInt(op.trim())]);
       }else if(op.includes("以上")){
-        data.prices.push([parseInt(op.trim()), 999999999]);
+        data.price_permonth.push([parseInt(op.trim()), 999999999]);
       }
     });
   }
@@ -141,7 +139,7 @@ function getRequestData(){
 }
 
 // Don't close when clicking inside menu for every dropdown menus.
-const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+const dropdownMenus = document.querySelectorAll(".dropdown-menu-stay");
 dropdownMenus.forEach((menu) => {
   menu.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -253,9 +251,7 @@ function disableSubmenu() {
       }
     }
     submenu.find("*").prop("disabled", true);
-    console.log('check');
   } else {
-    console.log('uncheck');
     submenu.find("*").prop("disabled", false);
   }
 }

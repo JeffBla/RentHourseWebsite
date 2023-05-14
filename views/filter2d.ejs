@@ -4,7 +4,7 @@
     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-popper="none">
       <%= title %>
     </button>
-    <div class="dropdown-menu px-3" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown-menu dropdown-menu-stay px-3" aria-labelledby="dropdownMenuButton">
       <% for (var i = 0; i < options.length; i++) { %>
         <% let checkBoxId = "checkBox"+title+options[i] %>
         <% let label = options[i] %>
@@ -13,7 +13,7 @@
           <label class="form-check-label" for="<% checkBoxId %>">
             <%= label %>
           </label>
-          <div class="dropdown-menu dropdown-submenu">
+          <div class="dropdown-menu dropdown-menu-stay dropdown-submenu">
             <% for (var j = 0; j < options2d[i].length; j++) { %>
               <% let checkBoxId2 = "checkBox"+title+options[i]+options2d[i][j] %>
               <% let label2 = options2d[i][j] %>

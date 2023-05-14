@@ -9,4 +9,5 @@ FROM
     map_object AS m
 WHERE
     ${joinTableCondStr:value}
+    ${searchCondStr:raw}
 LIMIT ${limit:value} OFFSET ${offect:value}

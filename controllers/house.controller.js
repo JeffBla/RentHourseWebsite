@@ -1,5 +1,5 @@
-const houseModule = require("../modules/house.module");
-const filter_data = require("../modules/filter_data");
+const houseModel = require("../models/house.model");
+const filter_data = require("../models/filter_data");
 
 const houseSelect = (req, res) => {
   res.render("index", {
@@ -8,7 +8,7 @@ const houseSelect = (req, res) => {
 };
 
 const SelectAllHouseData = (req, res) => {
-  houseModule
+  houseModel
     .SelectAllRentInfo_cover_forTest(req.body.isAuth, req.body.limit)
     .then((result) => {
       res.send(result);
@@ -21,23 +21,22 @@ const SelectAllHouseData = (req, res) => {
 const submit_search = (req, res) => {
   console.log("data:\n" + JSON.stringify(req.body));
 
-  houseModule
+  houseModel
     .SelectRentInfo_cover(
       req.body.isAuth,
       req.body.limit,
       req.body.page_num,
       req.body.order_by,
       req.body.address,
-      req.body.types,
-      req.body.prices,
-      req.body.identity,
       req.body.house_type,
+      req.body.price_permonth,
+      req.body.published_by,
+      req.body.building_type,
       req.body.area,
       req.body.floor,
       req.body.facilities,
       req.body.features,
       req.body.layout,
-      req.body.order_by,
       req.body.min_rent_period,
       req.body.gender_requirement
     )
@@ -50,7 +49,7 @@ const submit_search = (req, res) => {
 };
 
 const testHouse = (req, res) => {
-  houseModule
+  houseModel
     .SelectRentInfo_cover(req.body.isAuth, req.body.limit)
     .then((result) => {
       res.send(result);
