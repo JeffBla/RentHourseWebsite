@@ -36,6 +36,10 @@ router.route("/test-house-page").get((req, res) => {
                           "https://static.dd-room.com/images/object/d/a/9/da9dtxsyiy7rlcuh/cover/bf4c3ccf989a4ffa9cb03f7765355621_766x510.jpg"],
             address : "新北市汐止區仁愛路",
         },
+        map_data: {
+            type: ['house', 'clinic'],
+            coord: [[-25.363, 131.044],[-25.363, 120.000]],
+        }
     });
 });
 

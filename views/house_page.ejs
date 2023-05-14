@@ -34,7 +34,7 @@
                         </a>
                     </div>
                     <!-- Images End -->
-                    
+                    <!-- House Info Start -->
                     <h2 class="fw-bold mt-3 mb-0"><%= house_data.title %></h1>
                     <p class="fw-bold" style="font-size:48px;">$&nbsp;<%= house_data.price_permonth %>&nbsp;元/月</p>
                     
@@ -90,10 +90,21 @@
                     <hr class="mt-0" style="width: 99%">
                     <p class="fw-bold" style="font-size: 1.5rem;">描述</p>
                     <p class="ml-2 paragraph mx-3" style="font-size: 1.2rem;"><%= house_data.other_desc %></p>
+                    
+                    <!-- House Info End -->
+                    <!-- OSM -->
+                    <hr class="mt-0" style="width: 99%">
+                    <p class="fw-bold" style="font-size: 1.5rem;">位置</p>
+                    <div id="map" style="width:80%; height: 400px;" class="mx-3 mb-3"></div>
                 </div>
             </div>
         </div>
 
         <%- include('footer.ejs') %>
     </body>
+    <script>
+        $(document).ready(function () {
+            RenderMap('map', "<%= map_data.type %>", "<%= map_data.coord %>");
+        });
+    </script>
 </html>
