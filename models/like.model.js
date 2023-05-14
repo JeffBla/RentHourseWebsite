@@ -47,4 +47,13 @@ const likeUncheck = (user_id, rent_info_id) => {
   });
 };
 
+// const userLikeRentInfo = (
+//   user_id,
+//   limit = "10",
+//   pageNum = "1",
+//   orderBy = "默認排序"
+// ) => {
+
+// };
+
 module.exports = { likeCheck, likeUncheck };

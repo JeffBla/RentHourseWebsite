@@ -21,9 +21,17 @@ const SelectAllHouseData = (req, res) => {
 const submit_search = (req, res) => {
   console.log("data:\n" + JSON.stringify(req.body));
 
+  let isAuth = false;
+  let userId;
+  if (req.user) {
+    isAuth = true;
+    userId = req.user.id;
+  }
+
   houseModel
     .SelectRentInfo_cover(
-      req.body.isAuth,
+      isAuth,
+      userId,
       req.body.limit,
       req.body.page_num,
       req.body.order_by,

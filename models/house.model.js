@@ -122,6 +122,7 @@ function handleSearchOption(
 
 const SelectRentInfo_cover = (
   isAuth = false,
+  userId,
   limit = "10",
   pageNum = "1",
   orderBy = "默認排序",
@@ -184,40 +185,80 @@ const SelectRentInfo_cover = (
   let orderRefer = orderReferArr[orderTableIndex];
   let orderMode = orderModeArr[orderTableIndex];
 
-  return new Promise((resolve, reject) => {
-    db.connect()
-      .then((obj) => {
-        sco = obj;
+  if (!isAuth) {
+    return new Promise((resolve, reject) => {
+      db.connect()
+        .then((obj) => {
+          sco = obj;
 
-        offect = Number(limit) * (Number(pageNum) - 1);
-        return Promise.all([
-          sco.any(sql.rentInfo.selectCover, {
-            joinTableCondStr,
-            searchCondStr,
-            orderRefer,
-            orderMode,
-            limit,
-            offect,
-          }),
-          sco.any(sql.rentInfo.selectCover_count, {
-            joinTableCondStr,
-            searchCondStr,
-          }),
-        ]);
-      })
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((error) => {
-        console.log("ERROR:", error.message || error);
-        reject(error);
-      })
-      .finally(() => {
-        if (sco) {
-          sco.done();
-        }
-      });
-  });
+          offect = Number(limit) * (Number(pageNum) - 1);
+          return Promise.all([
+            sco.any(sql.rentInfo.selectCover, {
+              joinTableCondStr,
+              searchCondStr,
+              orderRefer,
+              orderMode,
+              limit,
+              offect,
+            }),
+            sco.any(sql.rentInfo.selectCover_count, {
+              joinTableCondStr,
+              searchCondStr,
+            }),
+          ]);
+        })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          console.log("ERROR:", error.message || error);
+          reject(error);
+        })
+        .finally(() => {
+          if (sco) {
+            sco.done();
+          }
+        });
+    });
+  } else {
+    user_id = userId;
+
+    return new Promise((resolve, reject) => {
+      db.connect()
+        .then((obj) => {
+          sco = obj;
+
+          offect = Number(limit) * (Number(pageNum) - 1);
+          return Promise.all([
+            sco.any(sql.rentInfo.selectCover_like, {
+              joinTableCondStr,
+              searchCondStr,
+              orderRefer,
+              orderMode,
+              limit,
+              offect,
+              user_id,
+            }),
+            sco.any(sql.rentInfo.selectCover_count, {
+              joinTableCondStr,
+              searchCondStr,
+            }),
+          ]);
+        })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          console.log("ERROR:", error.message || error);
+          reject(error);
+        })
+        .finally(() => {
+          if (sco) {
+            sco.done();
+          }
+        });
+    });
+  }
 };
 
 const SelectAllRentInfo_cover_forTest = (
@@ -284,40 +325,77 @@ const SelectAllRentInfo_cover_forTest = (
   let orderRefer = orderReferArr[orderTableIndex];
   let orderMode = orderModeArr[orderTableIndex];
 
-  return new Promise((resolve, reject) => {
-    db.connect()
-      .then((obj) => {
-        sco = obj;
+  if (!isAuth) {
+    return new Promise((resolve, reject) => {
+      db.connect()
+        .then((obj) => {
+          sco = obj;
 
-        offect = Number(limit) * (Number(pageNum) - 1);
-        return Promise.all([
-          sco.any(sql.rentInfo.selectCoverAll_forTest, {
-            joinTableCondStr,
-            searchCondStr,
-            orderRefer,
-            orderMode,
-            limit,
-            offect,
-          }),
-          sco.any(sql.rentInfo.selectCover_count, {
-            joinTableCondStr,
-            searchCondStr,
-          }),
-        ]);
-      })
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((error) => {
-        console.log("ERROR:", error.message || error);
-        reject(error);
-      })
-      .finally(() => {
-        if (sco) {
-          sco.done();
-        }
-      });
-  });
+          offect = Number(limit) * (Number(pageNum) - 1);
+          return Promise.all([
+            sco.any(sql.rentInfo.selectCoverAll_forTest, {
+              joinTableCondStr,
+              searchCondStr,
+              orderRefer,
+              orderMode,
+              limit,
+              offect,
+            }),
+            sco.any(sql.rentInfo.selectCover_count, {
+              joinTableCondStr,
+              searchCondStr,
+            }),
+          ]);
+        })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          console.log("ERROR:", error.message || error);
+          reject(error);
+        })
+        .finally(() => {
+          if (sco) {
+            sco.done();
+          }
+        });
+    });
+  } else {
+    return new Promise((resolve, reject) => {
+      db.connect()
+        .then((obj) => {
+          sco = obj;
+
+          offect = Number(limit) * (Number(pageNum) - 1);
+          return Promise.all([
+            sco.any(sql.rentInfo.selectCoverAll_forTest, {
+              joinTableCondStr,
+              searchCondStr,
+              orderRefer,
+              orderMode,
+              limit,
+              offect,
+            }),
+            sco.any(sql.rentInfo.selectCover_count, {
+              joinTableCondStr,
+              searchCondStr,
+            }),
+          ]);
+        })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          console.log("ERROR:", error.message || error);
+          reject(error);
+        })
+        .finally(() => {
+          if (sco) {
+            sco.done();
+          }
+        });
+    });
+  }
 };
 
 module.exports = { SelectRentInfo_cover, SelectAllRentInfo_cover_forTest };

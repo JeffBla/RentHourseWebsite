@@ -18,6 +18,7 @@ module.exports = {
   },
   rentInfo: {
     selectCover: sql("rentInfo/selectRentInfo_cover.sql"),
+    selectCover_like: sql("rentInfo/selectRentInfo_cover_like.sql"),
     selectCover_count: sql("rentInfo/selectRentInfo_cover_count.sql"),
     selectCoverAll_forTest: sql("rentInfo/selectRentInfo_coverAll_forTest.sql"),
   },
