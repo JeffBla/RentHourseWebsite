@@ -7,37 +7,8 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">租屋網大集合</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">讓你一次比較～全～部～的房地產物件～～</p>
+                    <h1 class="display-4 fw-bolder">我的收藏</h1>
                 </div>
-                <!-- filter start -->
-                <div class="row justify-content-center my-2">
-                  <div class="col-7 bg-white py-2 card rounded">
-                    <div class="row justify-content-start">
-                        <div class="col-9">
-                          <%- include('filter2d.ejs', {name : 'address', title : '地區', options : filter_data.counties, options2d : filter_data.districts}); %>
-                          <%- include('filter.ejs', {name : 'house_type', title : '型態', options : filter_data.house_type}); %>
-                          <%- include('filter.ejs', {name : 'price_permonth', title : '租金', options : filter_data.price_permonth}); %>
-                          <button class="btn btn-link text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="bi bi-chevron-down me-2"></i>
-                            更多選項
-                          </button>
-                          
-                          <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
-                                <% for (var i = 0; i < filter_data.others.length; i++){ %>
-                                    <%- include('filter.ejs', {name : filter_data.other_names[i], title : filter_data.others[i], options : filter_data.other_options[i]}); %>
-                                <% } %>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-3 p-3">
-                            <button id="submitBtn" type="submit" class="btn round bg-light w-100 h-100 update-house-btn">搜尋</button>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- filter end -->
             </div>
             
         </header>
@@ -50,7 +21,7 @@
                         <div class="d-flex justify-content-start">
                             <p class="fs-3">一共有&nbsp;</p>
                             <p id="itemCnt" class="fs-2 font-weight-bold" style="color: orange;"></p>
-                            <p class="fs-3">&nbsp;筆物件</p>
+                            <p class="fs-3">&nbsp;筆收藏</p>
                         </div>
                     
                     
@@ -95,7 +66,7 @@
                 setFilterData("order_by", "默認排序");
                 setFilterData("limit", "12");
 
-                const postUrl = '/submit';
+                const postUrl = '/user/favorite';
                 requestData(postUrl);
                 $(".update-house-btn").click(function(){
                     requestData(postUrl);

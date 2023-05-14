@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('head.ejs', {title : '租屋網大集合'}) %>
+    <body>
+        <%- include('navigation.ejs') %>
+        <!-- Header -->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Register</h1>
+                    <style>
+                        .register-form {
+                          padding: 50px;
+                        }
+                    </style>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <% if(typeof success_flash !== 'undefined' && success_flash != "") { %>
+            <div class="alert alert-success alert-dismissible fade show mx-4 mt-4" role="alert">
+            <%= success_flash %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+    
+        <% if(typeof error_flash !== 'undefined' && error_flash != ""){ %>
+            <div class="alert alert-danger alert-dismissible fade show mx-4 mt-4" role="alert">
+              <%= error_flash %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+
+
+        <form class="register-form" action="/user/register" method="POST" onsubmit="return confirmPassword()">
+          <h1 class="text-center">註冊頁面</h1>
+            <div class="bi-person-fill me-1">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username"
+                required>
+            </div>
+            <div class="bi bi-envelope-at-fill">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email"
+                required>
+            </div>
+            <div class="bi bi-lock">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password"
+                required>
+            </div>
+            <div class="bi bi-lock">
+                <label for="">Confirmed Password</label>
+                <input type="password" class="form-control" id="confirmedpassword" name="confirmedpassword"
+                required>
+            </div>
+        
+            <div>
+                <button class="btn btn-outline-dark me-2" type="submit">
+                    <i class="bi bi-person-plus me-1"></i>
+                    Register
+                </button>
+            </div>
+            <script>
+                function confirmPassword(){
+                    let pass = document.getElementById("password").value;
+                    let confirmPass = document.getElementById("confirmedpassword").value;
+                    if(pass === confirmPass){
+                        return true;
+                    }else{
+                        alert("Password is not same as confirmed password.");
+                        return false;
+                    }
+                }
+            </script>
+            
+        </form>
+        <form class="d-flex justify-content-center" action="/user/signin" method="GET">
+            <button class="btn btn-outline-dark" type="submit">
+                <i class="bi-person-fill me-1"></i>
+                Login Page
+            </button>
+        </form>    
+        
+        <%- include('footer.ejs') %> 
+
+    </body>
+</html> 
+        
+        
+        
+        
