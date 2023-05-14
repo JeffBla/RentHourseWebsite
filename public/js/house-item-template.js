@@ -1,7 +1,7 @@
 const house_item_template = 
 `<div class="col mb-5">
     <div class="card" title="來源：<%= house.coming_from %>">
-        <div class="h-100 btn p-0" onclick="window.open('<%= house.url %>', '_blank')">
+        <div class="h-100 btn p-0" onclick="window.open('/rent?id=<%= house.id %>', '_blank')">
             <!-- Product image-->
             <img class="card-img-top" src="<%= house.img_url %>"/>
             <!-- Product details-->
