@@ -256,16 +256,3 @@ function disableSubmenu() {
   }
 }
 
-// get those houses after submit button pressed.
-$(document).ready(function () {
-  // initialize options for certain select bar, in home page
-  if (window.location.pathname === '/'){
-    setFilterData("page_num", "1");
-    setFilterData("order_by", "默認排序");
-    setFilterData("limit", "12");
-
-    requestData();
-    $(".update-house-btn").click(requestData);
-    $(".disable-submenu").click(disableSubmenu);
-  }
-});

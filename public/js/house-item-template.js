@@ -18,8 +18,8 @@ const house_item_template =
         </div>
         <!-- Product actions-->
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
-            <button type="button" class="btn btn-outline-danger">
-                <i class="bi bi-heart"></i> Like
+            <button type="button" class="btn btn-outline-danger" onclick="likeBtnClick('likeIcon<%= house.id %>','<%= house.id %>')">
+                <i class="bi bi-heart" id="likeIcon<%= house.id %>"></i> Like
             </button>
         </div>
     </div>

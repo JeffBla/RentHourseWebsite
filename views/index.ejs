@@ -86,5 +86,18 @@
             </div>
         </section>
         <%- include('footer.ejs') %>
+        <script>
+            // get those houses after submit button pressed.
+            $(document).ready(function () {
+            // initialize options for certain select bar, in home page
+                setFilterData("page_num", "1");
+                setFilterData("order_by", "默認排序");
+                setFilterData("limit", "12");
+
+                requestData();
+                $(".update-house-btn").click(requestData);
+                $(".disable-submenu").click(disableSubmenu);
+            });
+        </script>
     </body>
 </html>
