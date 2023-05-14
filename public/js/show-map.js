@@ -1,6 +1,24 @@
+var redIcon = new L.Icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
 
+var blueIcon = new L.Icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
 
-  
+var greenIcon = new L.Icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76]
+});
+ 
 
 function RenderMap(mapid, type, markPt){
     var viewPt = [];
@@ -19,9 +37,18 @@ function RenderMap(mapid, type, markPt){
         maxZoom: 18,
     }).addTo(map);
 
-    for(var i = 0; i < markPt.length; i+=2){
-        var point = [markPt[i],markPt[i+1]];
-        var marker = L.marker(point);
-        marker.addTo(map);
+    for(var i = 0; i < type.length; i++){
+        var point = [markPt[i*2],markPt[i*2+1]];
+        switch(type[i]){
+            case 'house':
+                L.marker(point, {icon : redIcon}).addTo(map)
+                break;
+            case 'clinic':
+                L.marker(point, {icon : blueIcon}).addTo(map)
+                break;
+            case 'parking':
+                L.marker(point, {icon : redIcon}).addTo(map)
+                break;
+        }
     };
 }
