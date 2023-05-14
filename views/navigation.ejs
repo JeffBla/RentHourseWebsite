@@ -20,21 +20,34 @@
         </li>
         <li class="nav-item"><a class="nav-link" href="/#section">房屋</a></li>
       </ul>
-      <form class="d-flex" action="/user/signin" method="GET">
-        <button class="btn" type="submit">
+      <% if (user) { %>
+        <button class="btn">
           <i class="bi-person-fill me-1"></i>
-          登入/註冊
+          Hello,&nbsp;<%= user.username %>
         </button>
-      </form>
-      <form class="d-flex" action="/user" method="GET">
-        <button class="btn" type="submit">
-          <i class="bi-cart-fill me-1"></i>
-          我的收藏
-          <span class="badge bg-dark text-white ms-1 rounded-pill" id="likeCnt"
-            >0</span
-          >
-        </button>
-      </form>
+        <form class="d-flex" action="/user" method="GET">
+          <button class="btn" type="submit">
+            <i class="bi-cart-fill me-1"></i>
+            我的收藏
+            <span class="badge bg-dark text-white ms-1 rounded-pill" id="likeCnt"
+              >0</span
+            >
+          </button>
+        </form>
+        <form class="d-flex" action="/user/signout" method="POST" onsubmit="return false;">
+          <button class="btn" type="submit">
+            <i class="bi bi-box-arrow-right me-1"></i>
+            登出
+          </button>
+        </form>
+      <% } else { %>
+        <form class="d-flex" action="/user/signin" method="GET">
+          <button class="btn" type="submit">
+            <i class="bi-person-fill me-1"></i>
+            登入/註冊
+          </button>
+        </form>
+      <% } %>
     </div>
   </div>
 </nav>
