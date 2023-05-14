@@ -1,8 +1,6 @@
 // this function call when filter content changes
 function editFilter(labelAreaId, checkBoxId, label, name) {
-  console.log(label);
   var checkBox = document.getElementById(checkBoxId);
-  console.log(checkBox.checked);
   if (checkBox.checked == false) {
     addLabel(labelAreaId, checkBoxId, label, name);
     addFilterData(name, label);
@@ -253,9 +251,7 @@ function disableSubmenu() {
       }
     }
     submenu.find("*").prop("disabled", true);
-    console.log('check');
   } else {
-    console.log('uncheck');
     submenu.find("*").prop("disabled", false);
   }
 }
