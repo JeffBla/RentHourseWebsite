@@ -17,20 +17,18 @@
             </div>
         </header>
         <!-- Section-->
-        <% if(typeof success_flash !== 'undefined') { %>
-            <% if(success_flash != "") { %>
-            <div class="alert alert-success mx-4 mt-4" role="alert">
-                <%= success_flash %>
+        <% if(typeof success_flash !== 'undefined' && success_flash != "") { %>
+            <div class="alert alert-success alert-dismissible fade show mx-4 mt-4" role="alert">
+            <%= success_flash %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <% } %>
         <% } %>
-      
-        <% if(typeof error_flash !== 'undefined'){ %>
-              <% if(error_flash != "") { %>
-              <div class="alert alert-danger mx-4 mt-4" role="alert">
-                  <%= error_flash %>
-              </div>
-              <% } %>
+    
+        <% if(typeof error_flash !== 'undefined' && error_flash != ""){ %>
+            <div class="alert alert-danger alert-dismissible fade show mx-4 mt-4" role="alert">
+              <%= error_flash %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         <% } %>
 
 
