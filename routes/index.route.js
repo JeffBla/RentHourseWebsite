@@ -39,7 +39,8 @@ router.route("/test-house-page").get((req, res) => {
         map_data: {
             type: ['house', 'clinic'],
             coord: [[-25.363, 131.044],[-25.363, 120.000]],
-        }
+        },
+        aqi: 61,
     });
 });
 
