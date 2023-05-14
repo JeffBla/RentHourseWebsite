@@ -20,9 +20,7 @@ function addLabel(labelAreaId, checkBoxId, label, name) {
   closeButton.classList.add("btn-close");
   closeButton.setAttribute("aria-label", "Close");
   closeButton.setAttribute(
-    "onClick",
-    `removeLabel("${labelAreaId}", "${checkBoxId}", "${label}");
-    removeFilterData("${name}","${label}");`
+    "onClick",`onLabelDismiss("${labelAreaId}", "${checkBoxId}", "${label}", "${name}");`
   );
   tag.appendChild(closeButton);
   labelArea.appendChild(tag);
@@ -39,6 +37,13 @@ function removeLabel(labelAreaId, checkBoxId, label) {
   // uncheck
   var checkBox = document.getElementById(checkBoxId);
   checkBox.checked = false;
+}
+
+function onLabelDismiss(labelAreaId, checkBoxId, label, name) {
+  removeLabel(`${labelAreaId}`, `${checkBoxId}`, `${label}`);
+  removeFilterData(`${name}`,`${label}`);
+  var submenu = $(`#${checkBoxId}`).nextAll('.dropdown-submenu').first();
+  if(submenu) submenu.find("*").prop("disabled", false);
 }
 
 let filter_data = {};
@@ -269,6 +274,7 @@ function disableSubmenu() {
   // Disable submenu when the parent checkbox checked.
   // Remove children label in label area at the same time.
   let submenu = $(this).find(".dropdown-submenu");
+  if(!submenu)return;// Not parent node
   let checkBox = $(this).find(".form-check-input")[0];
   if (checkBox.checked) {
     let checkBoxes = submenu.find(".form-check-input");
