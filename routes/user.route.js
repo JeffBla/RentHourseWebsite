@@ -5,6 +5,7 @@ const router = new express.Router();
 const passport = require("passport");
 
 const userCtrl = require("../controllers/user.controller");
+const houseCtrl = require("../controllers/house.controller");
 
 const filter_data = require("../models/filter_data");
 
@@ -58,9 +59,6 @@ router
     });
   });
 
-router.route("/flashtest").get((req, res) => {
-  req.flash("success_flash", "You are logged out");
-  res.send(req.flash("success_flash"));
-});
+router.route("/favorite").post(houseCtrl.GetFavorRentInfo);
 
 module.exports = router;

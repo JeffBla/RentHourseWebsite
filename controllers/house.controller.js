@@ -56,6 +56,18 @@ const submit_search = (req, res) => {
     });
 };
 
+const GetFavorRentInfo = (req, res) => {
+  const { page_num, order_by, limit } = req.body;
+  houseModel
+    .SelectRentInfo_favor(req.user.id, limit, page_num, order_by)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      return res.send(err);
+    });
+};
+
 const testHouse = (req, res) => {
   houseModel
     .SelectRentInfo_cover(req.body.isAuth, req.body.limit)
@@ -67,4 +79,10 @@ const testHouse = (req, res) => {
     });
 };
 
-module.exports = { testHouse, houseSelect, SelectAllHouseData, submit_search };
+module.exports = {
+  testHouse,
+  houseSelect,
+  SelectAllHouseData,
+  submit_search,
+  GetFavorRentInfo,
+};

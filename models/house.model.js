@@ -139,18 +139,6 @@ const SelectRentInfo_cover = (
   min_rent_period,
   gender_requirement
 ) => {
-  // implicit condition
-  let joinTableCond = [
-    "r.house_id=h.id",
-    "h.map_object_id=m.id",
-    "i_cover.id=r.image_id_cover",
-  ];
-
-  let joinTableCondStr = joinTableCond[0];
-  for (let i = 1; i < joinTableCond.length; i++) {
-    joinTableCondStr += " AND " + joinTableCond[i];
-  }
-
   // target condition
   let searchCondStr = handleSearchOption(
     address,
@@ -194,7 +182,6 @@ const SelectRentInfo_cover = (
           offect = Number(limit) * (Number(pageNum) - 1);
           return Promise.all([
             sco.any(sql.rentInfo.selectCover, {
-              joinTableCondStr,
               searchCondStr,
               orderRefer,
               orderMode,
@@ -202,7 +189,6 @@ const SelectRentInfo_cover = (
               offect,
             }),
             sco.any(sql.rentInfo.selectCover_count, {
-              joinTableCondStr,
               searchCondStr,
             }),
           ]);
@@ -231,7 +217,6 @@ const SelectRentInfo_cover = (
           offect = Number(limit) * (Number(pageNum) - 1);
           return Promise.all([
             sco.any(sql.rentInfo.selectCover_like, {
-              joinTableCondStr,
               searchCondStr,
               orderRefer,
               orderMode,
@@ -240,7 +225,6 @@ const SelectRentInfo_cover = (
               user_id,
             }),
             sco.any(sql.rentInfo.selectCover_count, {
-              joinTableCondStr,
               searchCondStr,
             }),
             sco.any(sql.rentInfo.selectCover_likeCount, {
@@ -337,7 +321,6 @@ const SelectAllRentInfo_cover_forTest = (
           offect = Number(limit) * (Number(pageNum) - 1);
           return Promise.all([
             sco.any(sql.rentInfo.selectCoverAll_forTest, {
-              joinTableCondStr,
               searchCondStr,
               orderRefer,
               orderMode,
@@ -345,7 +328,6 @@ const SelectAllRentInfo_cover_forTest = (
               offect,
             }),
             sco.any(sql.rentInfo.selectCover_count, {
-              joinTableCondStr,
               searchCondStr,
             }),
           ]);
@@ -372,7 +354,6 @@ const SelectAllRentInfo_cover_forTest = (
           offect = Number(limit) * (Number(pageNum) - 1);
           return Promise.all([
             sco.any(sql.rentInfo.selectCoverAll_forTest, {
-              joinTableCondStr,
               searchCondStr,
               orderRefer,
               orderMode,
@@ -380,7 +361,6 @@ const SelectAllRentInfo_cover_forTest = (
               offect,
             }),
             sco.any(sql.rentInfo.selectCover_count, {
-              joinTableCondStr,
               searchCondStr,
             }),
           ]);
@@ -401,4 +381,58 @@ const SelectAllRentInfo_cover_forTest = (
   }
 };
 
-module.exports = { SelectRentInfo_cover, SelectAllRentInfo_cover_forTest };
+const SelectRentInfo_favor = (
+  userId,
+  limit = "10",
+  pageNum = "1",
+  orderBy = "默認排序"
+) => {
+  // handle order
+  let orderTableIndex = order_byTable.findIndex((e) => {
+    return e == orderBy;
+  });
+  // if equal -1, set default
+  if (orderTableIndex == -1) {
+    orderTableIndex = 0;
+  }
+  let orderRefer = orderReferArr[orderTableIndex];
+  let orderMode = orderModeArr[orderTableIndex];
+
+  offect = Number(limit) * (Number(pageNum) - 1);
+  return new Promise((resolve, reject) => {
+    db.connect()
+      .then((obj) => {
+        sco = obj;
+
+        return Promise.all([
+          sco.any(sql.rentInfo.selectFavor, {
+            userId,
+            orderRefer,
+            orderMode,
+            limit,
+            offect,
+          }),
+          sco.any(sql.rentInfo.selectFavor_count, {
+            userId,
+          }),
+        ]);
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      })
+      .finally(() => {
+        if (sco) {
+          sco.done();
+        }
+      });
+  });
+};
+
+module.exports = {
+  SelectRentInfo_cover,
+  SelectAllRentInfo_cover_forTest,
+  SelectRentInfo_favor,
+};

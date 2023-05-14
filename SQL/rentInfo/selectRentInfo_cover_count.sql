@@ -4,5 +4,7 @@ FROM rent_info AS r,
     house AS h,
     map_object AS m
 WHERE
-    ${joinTableCondStr:value}
+    r.house_id=h.id AND
+    h.map_object_id=m.id AND
+    i_cover.id=r.image_id_cover
     ${searchCondStr:raw}
