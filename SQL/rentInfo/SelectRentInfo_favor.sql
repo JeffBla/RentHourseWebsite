@@ -1,6 +1,7 @@
 SELECT r.id, r.title, r.coming_from,
      r.price_permonth, r.url,
-      i_cover.url AS img_url
+      i_cover.url AS img_url,
+      r.id IS NOT NULL AS "like"
 FROM
     rent_info AS r,
     image AS i_cover,
