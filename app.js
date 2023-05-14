@@ -18,6 +18,7 @@ const userModel = require("./models/user.model");
 
 const homeRoute = require("./routes/index.route.js");
 const userRoute = require("./routes/user.route.js");
+const likeRoute = require("./routes/like.route.js");
 
 const app = express();
 
@@ -45,7 +46,7 @@ passport.use(
     },
     // Varify Callback: 新增 req 引數
     async (req, username, password, done) => {
-      let user = await userModel.CheckUser(username, password);
+      let user = await userModel.CheckUser(username);
       if (user == null) {
         return done(null, false, req.flash("error_flash", "User not found."));
       } else {
@@ -83,7 +84,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser((id, done) => {
-  // 透過使用者 id 到 MongoDB 資料庫尋找用戶完整資訊
+  // 透過使用者 id 到 DB尋找用戶完整資訊
   userModel
     .CheckUserById(id)
     .then((user) => {
@@ -99,13 +100,14 @@ app.use(flash());
 app.use(function (req, res, next) {
   res.locals.success_flash = req.flash("success_flash");
   res.locals.error_flash = req.flash("error_flash");
+  res.locals.user = req.user || null;
   // res.locals.error = req.flash('error');
-  // res.locals.user = req.user || null;
   next();
 });
 
 app.use("/", homeRoute);
 app.use("/user", userRoute);
+app.use("/like", likeRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

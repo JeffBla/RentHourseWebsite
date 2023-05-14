@@ -1,6 +1,10 @@
 const db = require("./query");
 const sql = require("../SQL/sql");
 
+const { order_by: order_byTable } = require("./filter_data");
+const orderReferArr = ["r.id", "r.price_permonth", "r.price_permonth"];
+const orderModeArr = ["ASC", "ASC", "DESC"];
+
 function isObjEmpty(obj) {
   return Object.keys(obj) == 0;
 }
@@ -167,7 +171,18 @@ const SelectRentInfo_cover = (
   if (searchCondStr != "") {
     searchCondStr = " AND " + searchCondStr;
   }
-  console.log(searchCondStr);
+  // console.log(searchCondStr);
+
+  // handle order
+  let orderTableIndex = order_byTable.findIndex((e) => {
+    return e == orderBy;
+  });
+  // if equal -1, set default
+  if (orderTableIndex == -1) {
+    orderTableIndex = 0;
+  }
+  let orderRefer = orderReferArr[orderTableIndex];
+  let orderMode = orderModeArr[orderTableIndex];
 
   return new Promise((resolve, reject) => {
     db.connect()
@@ -179,6 +194,8 @@ const SelectRentInfo_cover = (
           sco.any(sql.rentInfo.selectCover, {
             joinTableCondStr,
             searchCondStr,
+            orderRefer,
+            orderMode,
             limit,
             offect,
           }),
@@ -203,25 +220,90 @@ const SelectRentInfo_cover = (
   });
 };
 
-const SelectAllRentInfo_cover_forTest = (isAuth = false, limit = 10) => {
+const SelectAllRentInfo_cover_forTest = (
+  isAuth = false,
+  limit = "10",
+  pageNum = "1",
+  orderBy = "默認排序",
+  address,
+  house_type,
+  price_permonth,
+  published_by,
+  building_type,
+  area,
+  floor,
+  facilities,
+  features,
+  layout,
+  min_rent_period,
+  gender_requirement
+) => {
+  // implicit condition
   let joinTableCond = [
     "r.house_id=h.id",
     "h.map_object_id=m.id",
-    "i_cover.house_id=r.image_id_cover",
+    "i_cover.id=r.image_id_cover",
   ];
 
   let joinTableCondStr = joinTableCond[0];
   for (let i = 1; i < joinTableCond.length; i++) {
     joinTableCondStr += " AND " + joinTableCond[i];
   }
+
+  // target condition
+  let searchCondStr = handleSearchOption(
+    address,
+    house_type,
+    price_permonth,
+    published_by,
+    building_type,
+    area,
+    floor,
+    facilities,
+    features,
+    layout,
+    min_rent_period,
+    gender_requirement
+  );
+
+  // since it will insert in the scend condition of the sql
+  // need add AND
+  if (searchCondStr != "") {
+    searchCondStr = " AND " + searchCondStr;
+  }
+  // console.log(searchCondStr);
+
+  // handle order
+  let orderTableIndex = order_byTable.findIndex((e) => {
+    return e == orderBy;
+  });
+  // if equal -1, set default
+  if (orderTableIndex == -1) {
+    orderTableIndex = 0;
+  }
+  let orderRefer = orderReferArr[orderTableIndex];
+  let orderMode = orderModeArr[orderTableIndex];
+
   return new Promise((resolve, reject) => {
     db.connect()
       .then((obj) => {
         sco = obj;
-        return sco.any(sql.rentInfo.selectCoverAll_forTest, {
-          joinTableCondStr,
-          limit,
-        });
+
+        offect = Number(limit) * (Number(pageNum) - 1);
+        return Promise.all([
+          sco.any(sql.rentInfo.selectCoverAll_forTest, {
+            joinTableCondStr,
+            searchCondStr,
+            orderRefer,
+            orderMode,
+            limit,
+            offect,
+          }),
+          sco.any(sql.rentInfo.selectCover_count, {
+            joinTableCondStr,
+            searchCondStr,
+          }),
+        ]);
       })
       .then((data) => {
         resolve(data);

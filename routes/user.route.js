@@ -28,14 +28,14 @@ router
     userCtrl.userSignInSuss
   );
 
-router.route("/test").get((req, res) => {
+router.route("/flashtest").get((req, res) => {
   req.flash("success_flash", "You are logged out");
   res.send(req.flash("success_flash"));
 });
 
 /* eslint-disable no-unused-vars */
 router.route("/id/:username").get((req, res) => {
-  res.send("user");
+  res.render("userHome");
 });
 
 module.exports = router;

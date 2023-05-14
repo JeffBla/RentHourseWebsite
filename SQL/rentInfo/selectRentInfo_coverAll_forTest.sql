@@ -7,4 +7,5 @@ FROM
     map_object AS m
 WHERE
     ${joinTableCondStr:value}
+ORDER BY ${orderRefer:raw} ${orderMode:value}
 LIMIT ${limit:value}

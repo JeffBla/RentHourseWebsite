@@ -12,6 +12,9 @@ module.exports = {
   users: {
     add: sql("user/createUser.sql"),
   },
+  like: {
+    add: sql("like/likeCheck.sql"),
+  },
   rentInfo: {
     selectCover: sql("rentInfo/selectRentInfo_cover.sql"),
     selectCover_count: sql("rentInfo/selectRentInfo_cover_count.sql"),

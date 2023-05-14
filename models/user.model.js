@@ -24,7 +24,7 @@ const UserRegister = (username, email, hashedPassword) => {
   });
 };
 
-const CheckUser = (username, password) => {
+const CheckUser = (username) => {
   return new Promise((resolve, reject) => {
     db.connect()
       .then((obj) => {

@@ -3,10 +3,18 @@ const { QueryResultError, errors } = require("pg-promise")(/* initOptions */);
 
 const userModel = require("../models/user.model");
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+
+  res.redirect("/user/signin");
+}
+
 const userRegisterPost = async (req, res) => {
   const { username, email, password } = req.body;
 
-  user = await userModel.CheckUser(username, password);
+  user = await userModel.CheckUser(username);
   if (user == null) {
     // 加密密碼
     const encryptedPassword = bcrypt.hashSync(password, 10);
@@ -25,4 +33,4 @@ const userSignInSuss = (req, res) => {
   res.redirect(`/users/id/${req.body.username}`);
 };
 
-module.exports = { userSignInSuss, userRegisterPost };
+module.exports = { ensureAuthenticated, userSignInSuss, userRegisterPost };

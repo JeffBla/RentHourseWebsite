@@ -10,4 +10,5 @@ FROM
 WHERE
     ${joinTableCondStr:value}
     ${searchCondStr:raw}
+ORDER BY ${orderRefer:raw} ${orderMode:value}
 LIMIT ${limit:value} OFFSET ${offect:value}
