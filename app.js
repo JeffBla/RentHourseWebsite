@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
 const bcrypt = require("bcrypt");
 const flash = require("connect-flash");
 
@@ -69,8 +70,11 @@ app.use(
     resave: "false",
     saveUninitialized: "false",
     cookie: {
-      maxAge: 300000, // session的存活時間，5分鐘，單位毫秒
+      maxAge: 86400000, // session的存活時間，24hr，單位毫秒
     },
+    store: new MemoryStore({
+      checkPeriod: 86400000, // prune expired entries every 24h
+    }),
   })
 );
 // 初始化 Passport
