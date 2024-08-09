@@ -1,0 +1,1 @@
+TRUNCATE favorite, rent_search_info, image, rent_info, house, rentinfo_user;
