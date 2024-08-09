@@ -9,31 +9,38 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "body-parser": "~1.13.2",
+    "body-parser": "^1.20.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "dotenv": "^16.0.3",
-    "ejs": "~2.3.3",
-    "express": "~4.13.1",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
     "express-session": "^1.17.3",
     "memorystore": "^1.6.7",
-    "morgan": "~1.6.1",
+    "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "pg": "^8.10.0",
     "pg-promise": "^11.4.3",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "eslint": "^1.10.3",
+    "eslint": "^9.8.0",
     "eslint-config-airbnb": "^4.0.0",
     "expect": "^1.13.4",
     "expect.js": "^0.3.1",
-    "grunt": "^0.4.5",
+    "grunt": "^1.6.1",
     "grunt-eslint": "^17.3.1",
-    "grunt-mocha-cli": "^2.0.0",
+    "grunt-mocha-cli": "^7.0.0",
     "load-grunt-tasks": "^3.4.0",
-    "mocha": "^2.4.5"
-  }
+    "mocha": "^10.7.0"
+  },
+  "description": "![Home page cover](./static/picture/Home-page-cover.png)",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "author": "",
+  "license": "ISC"
 }
