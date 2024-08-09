@@ -11,6 +11,4 @@ router.route("/check").post(userCtrl.ensureAuthenticated, likeCtrl.likeCheck);
 
 router.route("/uncheck").delete(likeCtrl.likeUncheck);
 
-// router.route("/userlikerent").post();
-
 module.exports = router;

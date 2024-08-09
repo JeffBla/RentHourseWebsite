@@ -12,17 +12,17 @@ services:
     ports:
       - 8080:8080
     container_name: expressjs
-#   db:
-#     image: postgres
-#     ports:
-#       - 5432:5432
-#     container_name: my_postgres
-#     environment:
-#       POSTGRES_USER: postgres
-#       POSTGRES_PASSWORD: password
-#       PGDATA: /var/lib/postgresql/data/pgdata
-#     volumes:
-#       - pgdata:/var/lib/postgresql/data/
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: rentweb
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
 
-# volumes:
-#   pgdata:
+volumes:
+  pgdata:

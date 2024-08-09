@@ -11,17 +11,22 @@ const cn = {
   max: 30, // use up to 30 connections
 };
 
-console.log(`connecting ${cn} ...`);
+const maskedCn = {
+  ...cn,
+  password: cn.password ? "****" : null,
+};
+
+console.log(`connecting ${JSON.stringify(maskedCn, null, 2)} ...`);
 const db = pgp(cn);
 
-// db.connect()
-//   .then((obj) => {
-//     const serverVersion = obj.client.serverVersion;
-//     console.log(serverVersion + " Connect Success");
-//     obj.done();
-//   })
-//   .catch((error) => {
-//     console.log("ERROR:", error.message || error);
-//   });
+db.connect()
+  .then((obj) => {
+    const serverVersion = obj.client.serverVersion;
+    console.log(serverVersion + " Connect Success");
+    obj.done();
+  })
+  .catch((error) => {
+    console.log("ERROR:", error.message || error);
+  });
 
 module.exports = db;

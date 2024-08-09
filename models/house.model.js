@@ -160,7 +160,9 @@ const SelectRentInfo_cover = (
   if (searchCondStr != "") {
     searchCondStr = " AND " + searchCondStr;
   }
-  // console.log(searchCondStr);
+  console.log("--searchCondStr--");
+  console.log(searchCondStr);
+  console.log("--searchCondStr--");
 
   // handle order
   let orderTableIndex = order_byTable.findIndex((e) => {

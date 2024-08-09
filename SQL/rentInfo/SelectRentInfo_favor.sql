@@ -3,14 +3,14 @@ SELECT r.id, r.title, r.coming_from,
       i_cover.url AS img_url
 FROM
     rent_info AS r,
+    rent_search_info AS rs,
     image AS i_cover,
     house AS h,
-    map_object AS m,
     rentinfo_user AS u,
     favorite AS f
 WHERE
     r.house_id=h.id AND
-    h.map_object_id=m.id AND
+    r.id=rs.rent_info_id AND
     i_cover.id=r.image_id_cover AND
     u.id=f.user_id AND f.rent_info_id=r.id AND
     u.id=${userId:value}
